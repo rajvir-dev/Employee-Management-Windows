@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System;
 using System.Windows.Forms;
+using EmployeeManagement_Windows.Core;
+using EmployeeManagement_Windows.Forms;
 
 namespace EmployeeManagement_Windows
 {
@@ -16,7 +15,28 @@ namespace EmployeeManagement_Windows
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+
+            // Initialize API Client
+            ApiClient.Initialize("https://localhost:44325");
+
+            // Check if user is already logged in via persisted session
+            if (SessionManager.IsLoggedIn)
+            {
+                // Start real-time notifications
+                _ = SignalRService.Instance.StartAsync(); 
+                
+                Application.Run(new MainDashboard());
+            }
+            else
+            {
+                using (var login = new LoginForm())
+                {
+                    if (login.ShowDialog() == DialogResult.OK)
+                    {
+                        Application.Run(new MainDashboard());
+                    }
+                }
+            }
         }
     }
 }

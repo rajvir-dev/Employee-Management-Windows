@@ -33,6 +33,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.AspNet.SignalR.Client, Version=2.4.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.SignalR.Client.2.4.3\lib\net45\Microsoft.AspNet.SignalR.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,6 +52,105 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\ApiClient.cs" />
+    <Compile Include="Core\SessionManager.cs" />
+    <Compile Include="Core\SignalRService.cs" />
+    <Compile Include="Helpers\ThemeColors.cs" />
+    <Compile Include="Models\CommentDto.cs" />
+    <Compile Include="Models\EmployeeDto.cs" />
+    <Compile Include="Models\LeaveDto.cs" />
+    <Compile Include="Models\LoginRequest.cs" />
+    <Compile Include="Models\LoginResponse.cs" />
+    <Compile Include="Models\MeetingRequest.cs" />
+    <Compile Include="Models\NotificationDto.cs" />
+    <Compile Include="Models\ProfileUpdateRequest.cs" />
+    <Compile Include="Models\TaskDto.cs" />
+    <Compile Include="Services\AuthService.cs" />
+    <Compile Include="Services\EmployeeService.cs" />
+    <Compile Include="Services\LeaveService.cs" />
+    <Compile Include="Services\NotificationService.cs" />
+    <Compile Include="Services\TaskService.cs" />
+    <Compile Include="Controls\CardPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ModernButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\StatusBadge.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ModernCard.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ModernTextBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\CommentItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\CommentItem.Designer.cs">
+      <DependentUpon>CommentItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\LeaveItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\LeaveItem.Designer.cs">
+      <DependentUpon>LeaveItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\TaskCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\TaskCard.Designer.cs">
+      <DependentUpon>TaskCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LeaveRequestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LeaveRequestForm.Designer.cs">
+      <DependentUpon>LeaveRequestForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MainDashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MainDashboard.Designer.cs">
+      <DependentUpon>MainDashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ScheduleMeetingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ScheduleMeetingForm.Designer.cs">
+      <DependentUpon>ScheduleMeetingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\KanbanBoard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\KanbanBoard.Designer.cs">
+      <DependentUpon>KanbanBoard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProfileView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\ProfileView.Designer.cs">
+      <DependentUpon>ProfileView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TaskDetailsView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\TaskDetailsView.Designer.cs">
+      <DependentUpon>TaskDetailsView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LeaveHistoryView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\LeaveHistoryView.Designer.cs">
+      <DependentUpon>LeaveHistoryView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,6 +180,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
