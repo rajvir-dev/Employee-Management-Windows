@@ -21,9 +21,9 @@ namespace EmployeeManagement_Windows.Components
 
         private void LoadData()
         {
-            lblType.Text = _leave.Description ?? "Leave Request";
+            lblType.Text = _leave.LeaveTypeName;
             lblDates.Text = $"{_leave.LeaveDate:MMM dd} - {_leave.LeaveEndDate:MMM dd, yyyy}";
-            lblReason.Text = string.IsNullOrEmpty(_leave.Remarks) ? "No remarks provided." : _leave.Remarks;
+            lblReason.Text = string.IsNullOrEmpty(_leave.Description) ? "No reason provided." : _leave.Description;
 
             // Map Status (0 = Pending, 1 = Approved, 2 = Rejected)
             switch (_leave.IsApproved)

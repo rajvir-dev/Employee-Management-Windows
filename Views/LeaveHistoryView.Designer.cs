@@ -51,8 +51,8 @@ namespace EmployeeManagement_Windows.Views
             this.btnRequestLeave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRequestLeave.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.btnRequestLeave.ForeColor = System.Drawing.Color.White;
-            this.btnRequestLeave.GradientEnd = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(0)))), ((int)(((byte)(224)))));
-            this.btnRequestLeave.GradientStart = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(45)))), ((int)(((byte)(226)))));
+            this.btnRequestLeave.GradientEnd = EmployeeManagement_Windows.Helpers.ThemeColors.PrimaryDark;
+            this.btnRequestLeave.GradientStart = EmployeeManagement_Windows.Helpers.ThemeColors.Primary;
             this.btnRequestLeave.Location = new System.Drawing.Point(630, 25);
             this.btnRequestLeave.Name = "btnRequestLeave";
             this.btnRequestLeave.Size = new System.Drawing.Size(150, 35);

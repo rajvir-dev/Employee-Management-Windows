@@ -22,9 +22,7 @@ namespace EmployeeManagement_Windows.Views
         private void SetupStyles()
         {
             this.BackColor = ThemeColors.Background;
-            lblHeader.ForeColor = ThemeColors.Primary;
-            btnRequestLeave.BackColor = ThemeColors.Primary;
-            btnRequestLeave.ForeColor = Color.White;
+            lblHeader.ForeColor = ThemeColors.TextPrimary;
         }
 
         protected override async void OnLoad(EventArgs e)
@@ -37,6 +35,7 @@ namespace EmployeeManagement_Windows.Views
                 SignalRService.Instance.OnNotificationReceived += async (title, message) => {
                     if (title != null && title.Contains("Leave"))
                     {
+                        if (this.IsDisposed) return;
                         if (this.InvokeRequired)
                         {
                             this.Invoke(new MethodInvoker(async () => await LoadLeaveHistoryAsync()));
@@ -56,9 +55,11 @@ namespace EmployeeManagement_Windows.Views
 
         private async Task LoadLeaveHistoryAsync()
         {
+            if (this.IsDisposed) return;
             try
             {
                 var leaves = await LeaveService.GetMyLeavesAsync();
+                if (this.IsDisposed) return;
                 flowLeaveHistory.Controls.Clear();
 
                 if (leaves == null) return;

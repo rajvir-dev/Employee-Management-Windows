@@ -28,7 +28,7 @@ namespace EmployeeManagement_Windows.Components
             // 
             this.lblType.AutoSize = true;
             this.lblType.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
-            this.lblType.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
+            this.lblType.ForeColor = EmployeeManagement_Windows.Helpers.ThemeColors.TextPrimary;
             this.lblType.Location = new System.Drawing.Point(15, 15);
             this.lblType.Name = "lblType";
             this.lblType.Size = new System.Drawing.Size(113, 20);
@@ -39,7 +39,7 @@ namespace EmployeeManagement_Windows.Components
             // 
             this.lblDates.AutoSize = true;
             this.lblDates.Font = new System.Drawing.Font("Segoe UI Semibold", 9F);
-            this.lblDates.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(45)))), ((int)(((byte)(226)))));
+            this.lblDates.ForeColor = EmployeeManagement_Windows.Helpers.ThemeColors.Primary;
             this.lblDates.Location = new System.Drawing.Point(15, 40);
             this.lblDates.Name = "lblDates";
             this.lblDates.Size = new System.Drawing.Size(127, 15);
@@ -51,7 +51,7 @@ namespace EmployeeManagement_Windows.Components
             this.lblReason.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblReason.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblReason.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(110)))), ((int)(((byte)(114)))));
+            this.lblReason.ForeColor = EmployeeManagement_Windows.Helpers.ThemeColors.TextSecondary;
             this.lblReason.Location = new System.Drawing.Point(15, 65);
             this.lblReason.Name = "lblReason";
             this.lblReason.Size = new System.Drawing.Size(550, 45);
@@ -80,8 +80,8 @@ namespace EmployeeManagement_Windows.Components
             this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEdit.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold);
             this.btnEdit.ForeColor = System.Drawing.Color.White;
-            this.btnEdit.GradientEnd = System.Drawing.Color.FromArgb(((int)(((byte)(108)))), ((int)(((byte)(92)))), ((int)(((byte)(231)))));
-            this.btnEdit.GradientStart = System.Drawing.Color.FromArgb(((int)(((byte)(162)))), ((int)(((byte)(155)))), ((int)(((byte)(254)))));
+            this.btnEdit.GradientEnd = EmployeeManagement_Windows.Helpers.ThemeColors.PrimaryDark;
+            this.btnEdit.GradientStart = EmployeeManagement_Windows.Helpers.ThemeColors.Primary;
             this.btnEdit.Location = new System.Drawing.Point(580, 50);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(90, 30);
@@ -94,7 +94,7 @@ namespace EmployeeManagement_Windows.Components
             // 
             this.pnlContainer.BackColor = System.Drawing.Color.Transparent;
             this.pnlContainer.BorderRadius = 15;
-            this.pnlContainer.CardColor = System.Drawing.Color.White;
+            this.pnlContainer.CardColor = EmployeeManagement_Windows.Helpers.ThemeColors.Surface;
             this.pnlContainer.Controls.Add(this.btnEdit);
             this.pnlContainer.Controls.Add(this.badgeStatus);
             this.pnlContainer.Controls.Add(this.lblReason);
