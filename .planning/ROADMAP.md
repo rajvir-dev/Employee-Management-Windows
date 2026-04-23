@@ -40,3 +40,13 @@
 
 ### Phase 10: Final Documentation
 - Setup guide and architecture documentation.
+
+### Phase 11: v1.0 Stabilization
+- Fix session persistence (profile photo loss).
+- Fix Kanban status mapping and rendering.
+- Verify async loading stability.
+- **Gap Closure**: Closes gaps from v1.0 Audit.
+
+### Phase 12: v1.0 Documentation Recovery
+- Generate `SUMMARY.md` and `VERIFICATION.md` for Phases 0-6.
+- **Gap Closure**: Closes documentation gaps from v1.0 Audit.
