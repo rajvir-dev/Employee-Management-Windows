@@ -157,6 +157,18 @@
     <Compile Include="Views\LeaveHistoryView.Designer.cs">
       <DependentUpon>LeaveHistoryView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Components\MeetingCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\MeetingCard.Designer.cs">
+      <DependentUpon>MeetingCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MeetingListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\MeetingListView.Designer.cs">
+      <DependentUpon>MeetingListView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -165,6 +177,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Controls\AvatarCircle.resx">
+      <DependentUpon>AvatarCircle.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -174,6 +189,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Views\ProfileView.resx">
+      <DependentUpon>ProfileView.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

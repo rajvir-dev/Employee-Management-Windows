@@ -41,6 +41,19 @@ namespace EmployeeManagement_Windows.Components
                 cardBubble.CardColor = Color.White;
                 lblAuthor.ForeColor = Color.FromArgb(142, 45, 226);
             }
+
+            // Display Work Log
+            if (_comment.HoursWorked > 0 || _comment.MinutesWorked > 0)
+            {
+                lblWorked.Text = $"🕒 {(_comment.HoursWorked ?? 0)}hrs {(_comment.MinutesWorked ?? 0)}min worked";
+                lblWorked.Visible = true;
+                this.Height = 110; // Increase height for the badge
+            }
+            else
+            {
+                lblWorked.Visible = false;
+                this.Height = 85; // Default height
+            }
         }
     }
 }

@@ -27,10 +27,63 @@ namespace EmployeeManagement_Windows.Views
             lblTitle.Text = _task.Title ?? "Untitled Task";
             lblDescription.Text = _task.Description ?? "No description provided.";
             
-            badgeStatus.Text = _task.Status?.ToUpper() ?? "UNKNOWN";
-            badgeStatus.BadgeColor = ThemeColors.GetStatusColor(_task.StatusId);
+            // Set initial status
+            UpdateStatusDisplay(_task.StatusId);
 
             await LoadComments();
+        }
+
+        private void UpdateStatusDisplay(int? statusId)
+        {
+            switch (statusId)
+            {
+                case 1: cmbStatus.SelectedIndex = 0; break; // TO DO
+                case 2: cmbStatus.SelectedIndex = 1; break; // IN PROGRESS
+                case 3: cmbStatus.SelectedIndex = 2; break; // COMPLETED
+                default: cmbStatus.SelectedIndex = -1; break;
+            }
+            
+            badgeStatus.Text = cmbStatus.SelectedItem?.ToString() ?? "UNKNOWN";
+            badgeStatus.BadgeColor = ThemeColors.GetStatusColor(statusId);
+            btnSaveStatus.Visible = false;
+        }
+
+        private void cmbStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbStatus.SelectedIndex < 0) return;
+
+            int newStatusId = cmbStatus.SelectedIndex + 1;
+            btnSaveStatus.Visible = (newStatusId != _task.StatusId);
+        }
+
+        private async void btnSaveStatus_Click(object sender, EventArgs e)
+        {
+            if (cmbStatus.SelectedIndex < 0) return;
+
+            int newStatusId = cmbStatus.SelectedIndex + 1;
+            btnSaveStatus.Enabled = false;
+            
+            try
+            {
+                var result = await TaskService.UpdateStatusAsync(_task.EncryptedId, newStatusId);
+                if (result.Success)
+                {
+                    _task.StatusId = newStatusId;
+                    UpdateStatusDisplay(newStatusId);
+                }
+                else
+                {
+                    MessageBox.Show("Failed to update status: " + result.Message);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error updating status: " + ex.Message);
+            }
+            finally
+            {
+                btnSaveStatus.Enabled = true;
+            }
         }
 
         private async Task LoadComments()
@@ -65,11 +118,22 @@ namespace EmployeeManagement_Windows.Views
             btnSend.Enabled = false;
             try
             {
-                var request = new CommentRequest { CommentText = text };
+                int.TryParse(txtHours.Text, out int hours);
+                int.TryParse(txtMinutes.Text, out int minutes);
+
+                var request = new CommentRequest 
+                { 
+                    CommentText = text,
+                    HoursWorked = hours > 0 ? (int?)hours : null,
+                    MinutesWorked = minutes > 0 ? (int?)minutes : null
+                };
+
                 var result = await TaskService.AddCommentAsync(_task.EncryptedId, request);
                 if (result.Success)
                 {
                     txtComment.Clear();
+                    txtHours.Text = "";
+                    txtMinutes.Text = "";
                     await LoadComments();
                 }
             }

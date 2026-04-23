@@ -35,7 +35,12 @@ namespace EmployeeManagement_Windows.Components
             else lblPriority.ForeColor = ThemeColors.Success;
 
             // Status Badge
-            badgeStatus.Text = _task.Status ?? "Pending";
+            string status = _task.Status ?? "Pending";
+            if (_task.StatusId == 3) status = "Completed";
+            else if (_task.StatusId == 2) status = "In Progress";
+            else if (_task.StatusId == 1) status = "To Do";
+
+            badgeStatus.Text = status;
             badgeStatus.SetTheme(GetStatusTheme(_task.StatusId ?? 0));
         }
 

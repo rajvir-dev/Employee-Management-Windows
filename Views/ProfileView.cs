@@ -1,11 +1,11 @@
+using EmployeeManagement_Windows.Core;
+using EmployeeManagement_Windows.Models;
+using EmployeeManagement_Windows.Services;
 using System;
 using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using EmployeeManagement_Windows.Core;
-using EmployeeManagement_Windows.Models;
-using EmployeeManagement_Windows.Services;
 
 namespace EmployeeManagement_Windows.Views
 {
@@ -13,15 +13,63 @@ namespace EmployeeManagement_Windows.Views
     {
         private EmployeeDto _currentEmployee;
         private string _selectedPhotoBase64;
+        public event Action OnProfileUpdated;
 
         public ProfileView()
         {
             InitializeComponent();
+            this.Resize += (s, e) => UpdateLayout();
+        }
+
+        private void UpdateLayout()
+        {
+            int margin = 20;
+            int cardWidth = this.Width - (margin * 2) - 30; // 30 for scrollbar
+            if (cardWidth < 800) cardWidth = 830;
+
+            cardHeader.Width = cardWidth;
+            cardPersonal.Width = cardWidth;
+            cardAdditional.Width = cardWidth;
+            cardSecurity.Width = cardWidth;
+            pnlActions.Width = cardWidth;
+
+            // Header Button - Move to right
+            btnUploadPhoto.Location = new Point(cardWidth - btnUploadPhoto.Width - 30, btnUploadPhoto.Location.Y);
+
+            // Column sizing for inputs
+            int spacing = 30;
+            int colWidth = (cardWidth - (spacing + 60)) / 2;
+
+            // Personal Info Card
+            txtFullName.Width = colWidth;
+            txtBirthDate.Width = colWidth;
+            txtBirthDate.Left = colWidth + spacing + 30;
+            
+            txtMobile.Width = colWidth;
+            txtEmail.Width = colWidth;
+            txtEmail.Left = colWidth + spacing + 30;
+
+            // Professional Details Card
+            txtBio.Width = colWidth;
+            txtAddress.Width = colWidth;
+            txtAddress.Left = colWidth + spacing + 30;
+
+            txtPosition.Width = colWidth;
+            txtAmount.Width = colWidth;
+            txtAmount.Left = colWidth + spacing + 30;
+
+            cmbSalaryType.Width = colWidth;
+
+            // Security Card
+            txtPassword.Width = colWidth;
+            txtConfirmPassword.Width = colWidth;
+            txtConfirmPassword.Left = colWidth + spacing + 30;
         }
 
         protected override async void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
+            UpdateLayout();
             await LoadProfileAsync();
         }
 
@@ -60,7 +108,7 @@ namespace EmployeeManagement_Windows.Views
                     if (!string.IsNullOrEmpty(apiPhoto))
                     {
                         _selectedPhotoBase64 = apiPhoto;
-                        
+
                         // Update session cache
                         SessionManager.PhotoBase64 = _selectedPhotoBase64;
                         SessionManager.SaveSession();
@@ -80,6 +128,7 @@ namespace EmployeeManagement_Windows.Views
                             {
                                 pbPhoto.Image = Image.FromStream(ms);
                             }
+                            OnProfileUpdated?.Invoke();
                         }
                         catch { /* Ignore invalid base64 */ }
                     }
@@ -102,15 +151,16 @@ namespace EmployeeManagement_Windows.Views
                     {
                         byte[] imageBytes = File.ReadAllBytes(ofd.FileName);
                         _selectedPhotoBase64 = Convert.ToBase64String(imageBytes);
-                        
+
                         // Update session cache immediately
                         SessionManager.PhotoBase64 = _selectedPhotoBase64;
                         SessionManager.SaveSession();
-                        
+
                         using (var ms = new MemoryStream(imageBytes))
                         {
                             pbPhoto.Image = Image.FromStream(ms);
                         }
+                        OnProfileUpdated?.Invoke();
                     }
                     catch (Exception ex)
                     {
@@ -181,6 +231,11 @@ namespace EmployeeManagement_Windows.Views
                 return base64.Split(',')[1];
             }
             return base64;
+        }
+
+        private void lblHeaderName_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

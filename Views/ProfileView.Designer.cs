@@ -69,7 +69,7 @@ namespace EmployeeManagement_Windows.Views
             // 
             this.cardHeader.BackColor = System.Drawing.Color.Transparent;
             this.cardHeader.BorderRadius = 15;
-            this.cardHeader.CardColor = EmployeeManagement_Windows.Helpers.ThemeColors.Surface;
+            this.cardHeader.CardColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.cardHeader.Controls.Add(this.lblHeaderEmail);
             this.cardHeader.Controls.Add(this.lblHeaderName);
             this.cardHeader.Controls.Add(this.btnUploadPhoto);
@@ -81,15 +81,16 @@ namespace EmployeeManagement_Windows.Views
             this.cardHeader.Size = new System.Drawing.Size(830, 140);
             this.cardHeader.TabIndex = 0;
             this.cardHeader.Text = "Profile Settings";
+            this.cardHeader.Title = "";
             // 
             // lblHeaderEmail
             // 
             this.lblHeaderEmail.AutoSize = true;
             this.lblHeaderEmail.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblHeaderEmail.ForeColor = EmployeeManagement_Windows.Helpers.ThemeColors.TextSecondary;
+            this.lblHeaderEmail.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(114)))), ((int)(((byte)(128)))));
             this.lblHeaderEmail.Location = new System.Drawing.Point(120, 85);
             this.lblHeaderEmail.Name = "lblHeaderEmail";
-            this.lblHeaderEmail.Size = new System.Drawing.Size(110, 15);
+            this.lblHeaderEmail.Size = new System.Drawing.Size(97, 15);
             this.lblHeaderEmail.TabIndex = 3;
             this.lblHeaderEmail.Text = "user@gmail.com";
             // 
@@ -97,26 +98,29 @@ namespace EmployeeManagement_Windows.Views
             // 
             this.lblHeaderName.AutoSize = true;
             this.lblHeaderName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.lblHeaderName.ForeColor = EmployeeManagement_Windows.Helpers.ThemeColors.TextPrimary;
+            this.lblHeaderName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(24)))), ((int)(((byte)(39)))));
             this.lblHeaderName.Location = new System.Drawing.Point(120, 60);
             this.lblHeaderName.Name = "lblHeaderName";
-            this.lblHeaderName.Size = new System.Drawing.Size(131, 21);
+            this.lblHeaderName.Size = new System.Drawing.Size(145, 21);
             this.lblHeaderName.TabIndex = 2;
             this.lblHeaderName.Text = "Vaibhav P Rathod";
+            this.lblHeaderName.Click += new System.EventHandler(this.lblHeaderName_Click);
             // 
             // btnUploadPhoto
             // 
             this.btnUploadPhoto.BackColor = System.Drawing.Color.Transparent;
             this.btnUploadPhoto.BorderRadius = 8;
+            this.btnUploadPhoto.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnUploadPhoto.FlatAppearance.BorderSize = 0;
             this.btnUploadPhoto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUploadPhoto.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold);
             this.btnUploadPhoto.ForeColor = System.Drawing.Color.White;
-            this.btnUploadPhoto.GradientEnd = EmployeeManagement_Windows.Helpers.ThemeColors.PrimaryDark;
-            this.btnUploadPhoto.GradientStart = EmployeeManagement_Windows.Helpers.ThemeColors.Primary;
+            this.btnUploadPhoto.GradientEnd = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(74)))), ((int)(((byte)(183)))));
+            this.btnUploadPhoto.GradientStart = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(95)))), ((int)(((byte)(228)))));
             this.btnUploadPhoto.Location = new System.Drawing.Point(680, 65);
             this.btnUploadPhoto.Name = "btnUploadPhoto";
             this.btnUploadPhoto.Size = new System.Drawing.Size(120, 35);
+            this.btnUploadPhoto.Style = EmployeeManagement_Windows.Controls.ButtonStyle.Primary;
             this.btnUploadPhoto.TabIndex = 1;
             this.btnUploadPhoto.Text = "Upload Photo";
             this.btnUploadPhoto.UseVisualStyleBackColor = true;
@@ -124,7 +128,7 @@ namespace EmployeeManagement_Windows.Views
             // 
             // pbPhoto
             // 
-            this.pbPhoto.BackColor = EmployeeManagement_Windows.Helpers.ThemeColors.Surface1;
+            this.pbPhoto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(249)))), ((int)(((byte)(250)))));
             this.pbPhoto.Location = new System.Drawing.Point(30, 50);
             this.pbPhoto.Name = "pbPhoto";
             this.pbPhoto.Size = new System.Drawing.Size(70, 70);
@@ -136,7 +140,7 @@ namespace EmployeeManagement_Windows.Views
             // 
             this.cardPersonal.BackColor = System.Drawing.Color.Transparent;
             this.cardPersonal.BorderRadius = 15;
-            this.cardPersonal.CardColor = EmployeeManagement_Windows.Helpers.ThemeColors.Surface;
+            this.cardPersonal.CardColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.cardPersonal.Controls.Add(this.txtEmail);
             this.cardPersonal.Controls.Add(this.txtMobile);
             this.cardPersonal.Controls.Add(this.txtBirthDate);
@@ -148,6 +152,7 @@ namespace EmployeeManagement_Windows.Views
             this.cardPersonal.Size = new System.Drawing.Size(830, 180);
             this.cardPersonal.TabIndex = 1;
             this.cardPersonal.Text = "Personal Information";
+            this.cardPersonal.Title = "";
             // 
             // txtEmail
             // 
@@ -187,7 +192,7 @@ namespace EmployeeManagement_Windows.Views
             // 
             // txtFullName
             // 
-            this.txtFullName.BackColor = EmployeeManagement_Windows.Helpers.ThemeColors.Surface;
+            this.txtFullName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.txtFullName.LabelText = "Full Name";
             this.txtFullName.Location = new System.Drawing.Point(30, 55);
             this.txtFullName.Multiline = false;
@@ -201,7 +206,7 @@ namespace EmployeeManagement_Windows.Views
             // 
             this.cardAdditional.BackColor = System.Drawing.Color.Transparent;
             this.cardAdditional.BorderRadius = 15;
-            this.cardAdditional.CardColor = EmployeeManagement_Windows.Helpers.ThemeColors.Surface;
+            this.cardAdditional.CardColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.cardAdditional.Controls.Add(this.lblSalaryType);
             this.cardAdditional.Controls.Add(this.cmbSalaryType);
             this.cardAdditional.Controls.Add(this.txtAmount);
@@ -215,6 +220,7 @@ namespace EmployeeManagement_Windows.Views
             this.cardAdditional.Size = new System.Drawing.Size(830, 280);
             this.cardAdditional.TabIndex = 2;
             this.cardAdditional.Text = "Professional Details";
+            this.cardAdditional.Title = "";
             // 
             // lblSalaryType
             // 
@@ -223,7 +229,7 @@ namespace EmployeeManagement_Windows.Views
             this.lblSalaryType.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(110)))), ((int)(((byte)(114)))));
             this.lblSalaryType.Location = new System.Drawing.Point(30, 225);
             this.lblSalaryType.Name = "lblSalaryType";
-            this.lblSalaryType.Size = new System.Drawing.Size(68, 15);
+            this.lblSalaryType.Size = new System.Drawing.Size(69, 15);
             this.lblSalaryType.TabIndex = 5;
             this.lblSalaryType.Text = "Salary Type";
             // 
@@ -234,7 +240,7 @@ namespace EmployeeManagement_Windows.Views
             this.cmbSalaryType.FormattingEnabled = true;
             this.cmbSalaryType.Items.AddRange(new object[] {
             "Monthly",
-            "Weekly",
+            "Daily",
             "Hourly"});
             this.cmbSalaryType.Location = new System.Drawing.Point(30, 245);
             this.cmbSalaryType.Name = "cmbSalaryType";
@@ -293,7 +299,7 @@ namespace EmployeeManagement_Windows.Views
             // 
             this.cardSecurity.BackColor = System.Drawing.Color.Transparent;
             this.cardSecurity.BorderRadius = 15;
-            this.cardSecurity.CardColor = EmployeeManagement_Windows.Helpers.ThemeColors.Surface;
+            this.cardSecurity.CardColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.cardSecurity.Controls.Add(this.txtConfirmPassword);
             this.cardSecurity.Controls.Add(this.txtPassword);
             this.cardSecurity.Location = new System.Drawing.Point(23, 641);
@@ -303,6 +309,7 @@ namespace EmployeeManagement_Windows.Views
             this.cardSecurity.Size = new System.Drawing.Size(830, 120);
             this.cardSecurity.TabIndex = 3;
             this.cardSecurity.Text = "Security";
+            this.cardSecurity.Title = "";
             // 
             // txtConfirmPassword
             // 
@@ -312,7 +319,7 @@ namespace EmployeeManagement_Windows.Views
             this.txtConfirmPassword.Multiline = false;
             this.txtConfirmPassword.Name = "txtConfirmPassword";
             this.txtConfirmPassword.PasswordChar = true;
-            this.txtConfirmPassword.PasswordCharValue = '\0';
+            this.txtConfirmPassword.PasswordCharValue = '●';
             this.txtConfirmPassword.Size = new System.Drawing.Size(370, 45);
             this.txtConfirmPassword.TabIndex = 1;
             // 
@@ -324,7 +331,7 @@ namespace EmployeeManagement_Windows.Views
             this.txtPassword.Multiline = false;
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = true;
-            this.txtPassword.PasswordCharValue = '\0';
+            this.txtPassword.PasswordCharValue = '●';
             this.txtPassword.Size = new System.Drawing.Size(370, 45);
             this.txtPassword.TabIndex = 0;
             // 
@@ -343,7 +350,6 @@ namespace EmployeeManagement_Windows.Views
             this.btnBack.BorderRadius = 10;
             this.btnBack.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnBack.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(110)))), ((int)(((byte)(114)))));
-            this.btnBack.FlatAppearance.BorderSize = 1;
             this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBack.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnBack.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(110)))), ((int)(((byte)(114)))));
@@ -352,6 +358,7 @@ namespace EmployeeManagement_Windows.Views
             this.btnBack.Location = new System.Drawing.Point(200, 20);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(150, 45);
+            this.btnBack.Style = EmployeeManagement_Windows.Controls.ButtonStyle.Primary;
             this.btnBack.TabIndex = 1;
             this.btnBack.Text = "Back to Dashboard";
             this.btnBack.UseVisualStyleBackColor = true;
@@ -365,11 +372,12 @@ namespace EmployeeManagement_Windows.Views
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnSave.ForeColor = System.Drawing.Color.White;
-            this.btnSave.GradientEnd = EmployeeManagement_Windows.Helpers.ThemeColors.PrimaryDark;
-            this.btnSave.GradientStart = EmployeeManagement_Windows.Helpers.ThemeColors.Primary;
+            this.btnSave.GradientEnd = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(74)))), ((int)(((byte)(183)))));
+            this.btnSave.GradientStart = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(95)))), ((int)(((byte)(228)))));
             this.btnSave.Location = new System.Drawing.Point(30, 20);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(150, 45);
+            this.btnSave.Style = EmployeeManagement_Windows.Controls.ButtonStyle.Primary;
             this.btnSave.TabIndex = 0;
             this.btnSave.Text = "Save Changes";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -379,7 +387,7 @@ namespace EmployeeManagement_Windows.Views
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = EmployeeManagement_Windows.Helpers.ThemeColors.Background;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(244)))), ((int)(((byte)(246)))));
             this.Controls.Add(this.pnlFlow);
             this.Name = "ProfileView";
             this.Size = new System.Drawing.Size(900, 600);
@@ -388,9 +396,11 @@ namespace EmployeeManagement_Windows.Views
             this.cardHeader.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbPhoto)).EndInit();
             this.cardPersonal.ResumeLayout(false);
+            this.cardPersonal.PerformLayout();
             this.cardAdditional.ResumeLayout(false);
             this.cardAdditional.PerformLayout();
             this.cardSecurity.ResumeLayout(false);
+            this.cardSecurity.PerformLayout();
             this.pnlActions.ResumeLayout(false);
             this.ResumeLayout(false);
 

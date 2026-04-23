@@ -12,6 +12,7 @@ namespace EmployeeManagement_Windows.Forms
         private KanbanBoard _kanbanBoard;
         private ProfileView _profileView;
         private LeaveHistoryView _leaveHistoryView;
+        private MeetingListView _meetingListView;
 
         public MainDashboard()
         {
@@ -21,9 +22,20 @@ namespace EmployeeManagement_Windows.Forms
 
         private void SetupDashboard()
         {
-            // Placeholder avatar logic
-            // avatar.Image = ...
+            // Load photo from session
+            if (!string.IsNullOrEmpty(SessionManager.PhotoBase64))
+            {
+                avatar.SetImageFromBase64(SessionManager.PhotoBase64);
+            }
             ShowKanban();
+        }
+
+        public void RefreshAvatar()
+        {
+            if (!string.IsNullOrEmpty(SessionManager.PhotoBase64))
+            {
+                avatar.SetImageFromBase64(SessionManager.PhotoBase64);
+            }
         }
 
         private void ShowKanban()
@@ -47,6 +59,7 @@ namespace EmployeeManagement_Windows.Forms
             {
                 _profileView = new ProfileView();
                 _profileView.Dock = DockStyle.Fill;
+                _profileView.OnProfileUpdated += () => RefreshAvatar();
             }
 
             pnlMainContent.Controls.Clear();
@@ -67,6 +80,20 @@ namespace EmployeeManagement_Windows.Forms
             pnlMainContent.Controls.Add(_leaveHistoryView);
             
             SetButtonActive(btnLeaves);
+        }
+
+        private void ShowMeetings()
+        {
+            if (_meetingListView == null)
+            {
+                _meetingListView = new MeetingListView();
+                _meetingListView.Dock = DockStyle.Fill;
+            }
+
+            pnlMainContent.Controls.Clear();
+            pnlMainContent.Controls.Add(_meetingListView);
+
+            SetButtonActive(btnMeeting);
         }
 
         private void ShowTaskDetails(Models.TaskDto task)
@@ -95,6 +122,7 @@ namespace EmployeeManagement_Windows.Forms
         private void btnKanban_Click(object sender, EventArgs e) => ShowKanban();
         private void btnProfile_Click(object sender, EventArgs e) => ShowProfile();
         private void btnLeaves_Click(object sender, EventArgs e) => ShowLeaves();
+        private void btnMeeting_Click(object sender, EventArgs e) => ShowMeetings();
 
         private void btnLogout_Click(object sender, EventArgs e)
         {

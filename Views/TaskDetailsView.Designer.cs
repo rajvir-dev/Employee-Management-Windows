@@ -22,12 +22,16 @@ namespace EmployeeManagement_Windows.Views
             this.lblTitle = new System.Windows.Forms.Label();
             this.lblDescription = new System.Windows.Forms.Label();
             this.badgeStatus = new StatusBadge();
+            this.cmbStatus = new System.Windows.Forms.ComboBox();
+            this.btnSaveStatus = new EmployeeManagement_Windows.Controls.ModernButton();
             this.pnlComments = new System.Windows.Forms.FlowLayoutPanel();
             this.pnlInput = new CardPanel();
             this.txtComment = new System.Windows.Forms.TextBox();
             this.btnBack = new System.Windows.Forms.Button();
             this.btnSend = new ModernButton();
             this.lblActivityTitle = new System.Windows.Forms.Label();
+            this.txtHours = new EmployeeManagement_Windows.Controls.ModernTextBox();
+            this.txtMinutes = new EmployeeManagement_Windows.Controls.ModernTextBox();
             this.pnlHeader.SuspendLayout();
             this.pnlInput.SuspendLayout();
             this.SuspendLayout();
@@ -37,7 +41,9 @@ namespace EmployeeManagement_Windows.Views
             this.pnlHeader.BackColor = System.Drawing.Color.Transparent;
             this.pnlHeader.BorderRadius = 15;
             this.pnlHeader.CardColor = System.Drawing.Color.White;
+            this.pnlHeader.Controls.Add(this.btnSaveStatus);
             this.pnlHeader.Controls.Add(this.badgeStatus);
+            this.pnlHeader.Controls.Add(this.cmbStatus);
             this.pnlHeader.Controls.Add(this.lblDescription);
             this.pnlHeader.Controls.Add(this.lblTitle);
             this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
@@ -69,17 +75,54 @@ namespace EmployeeManagement_Windows.Views
             this.lblDescription.TabIndex = 1;
             this.lblDescription.Text = "Detailed description of the task goes here...";
             // 
+            // cmbStatus
+            // 
+            this.cmbStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmbStatus.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.cmbStatus.FormattingEnabled = true;
+            this.cmbStatus.Items.AddRange(new object[] {
+            "TO DO",
+            "IN PROGRESS",
+            "COMPLETED"});
+            this.cmbStatus.Location = new System.Drawing.Point(680, 25);
+            this.cmbStatus.Name = "cmbStatus";
+            this.cmbStatus.Size = new System.Drawing.Size(120, 23);
+            this.cmbStatus.TabIndex = 2;
+            this.cmbStatus.SelectedIndexChanged += new System.EventHandler(this.cmbStatus_SelectedIndexChanged);
+            // 
             // badgeStatus
             // 
             this.badgeStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.badgeStatus.BadgeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(184)))), ((int)(((byte)(148)))));
+            this.badgeStatus.BadgeColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(65)))), ((int)(((byte)(81)))));
             this.badgeStatus.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold);
             this.badgeStatus.ForeColor = System.Drawing.Color.White;
-            this.badgeStatus.Location = new System.Drawing.Point(830, 25);
+            this.badgeStatus.Location = new System.Drawing.Point(820, 23);
             this.badgeStatus.Name = "badgeStatus";
-            this.badgeStatus.Size = new System.Drawing.Size(100, 28);
-            this.badgeStatus.TabIndex = 2;
+            this.badgeStatus.Size = new System.Drawing.Size(110, 28);
+            this.badgeStatus.TabIndex = 3;
             this.badgeStatus.Text = "IN PROGRESS";
+            // 
+            // btnSaveStatus
+            // 
+            this.btnSaveStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSaveStatus.BackColor = System.Drawing.Color.Transparent;
+            this.btnSaveStatus.BorderRadius = 8;
+            this.btnSaveStatus.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSaveStatus.FlatAppearance.BorderSize = 0;
+            this.btnSaveStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSaveStatus.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold);
+            this.btnSaveStatus.ForeColor = System.Drawing.Color.White;
+            this.btnSaveStatus.GradientEnd = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(95)))), ((int)(((byte)(228)))));
+            this.btnSaveStatus.GradientStart = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(95)))), ((int)(((byte)(228)))));
+            this.btnSaveStatus.Location = new System.Drawing.Point(600, 23);
+            this.btnSaveStatus.Name = "btnSaveStatus";
+            this.btnSaveStatus.Size = new System.Drawing.Size(70, 28);
+            this.btnSaveStatus.TabIndex = 4;
+            this.btnSaveStatus.Text = "SAVE";
+            this.btnSaveStatus.Visible = false;
+            this.btnSaveStatus.Click += new System.EventHandler(this.btnSaveStatus_Click);
             // 
             // pnlComments
             // 
@@ -99,15 +142,49 @@ namespace EmployeeManagement_Windows.Views
             this.pnlInput.BackColor = System.Drawing.Color.Transparent;
             this.pnlInput.BorderRadius = 15;
             this.pnlInput.CardColor = System.Drawing.Color.White;
+            this.pnlInput.Controls.Add(this.txtMinutes);
+            this.pnlInput.Controls.Add(this.txtHours);
             this.pnlInput.Controls.Add(this.btnSend);
             this.pnlInput.Controls.Add(this.txtComment);
             this.pnlInput.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlInput.Location = new System.Drawing.Point(20, 580);
+            this.pnlInput.Location = new System.Drawing.Point(20, 560);
             this.pnlInput.Name = "pnlInput";
             this.pnlInput.Padding = new System.Windows.Forms.Padding(10);
             this.pnlInput.ShadowSize = 5;
-            this.pnlInput.Size = new System.Drawing.Size(960, 80);
+            this.pnlInput.Size = new System.Drawing.Size(960, 100);
             this.pnlInput.TabIndex = 2;
+            // 
+            // txtHours
+            // 
+            this.txtHours.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtHours.BackColor = System.Drawing.Color.White;
+            this.txtHours.LabelText = "";
+            this.txtHours.Location = new System.Drawing.Point(20, 60);
+            this.txtHours.MaxValue = 24;
+            this.txtHours.Multiline = false;
+            this.txtHours.Name = "txtHours";
+            this.txtHours.NumericOnly = true;
+            this.txtHours.PasswordChar = false;
+            this.txtHours.PasswordCharValue = '\0';
+            this.txtHours.PlaceholderText = "Hours";
+            this.txtHours.Size = new System.Drawing.Size(120, 30);
+            this.txtHours.TabIndex = 2;
+            // 
+            // txtMinutes
+            // 
+            this.txtMinutes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtMinutes.BackColor = System.Drawing.Color.White;
+            this.txtMinutes.LabelText = "";
+            this.txtMinutes.Location = new System.Drawing.Point(150, 60);
+            this.txtMinutes.MaxValue = 60;
+            this.txtMinutes.Multiline = false;
+            this.txtMinutes.Name = "txtMinutes";
+            this.txtMinutes.NumericOnly = true;
+            this.txtMinutes.PasswordChar = false;
+            this.txtMinutes.PasswordCharValue = '\0';
+            this.txtMinutes.PlaceholderText = "Minutes";
+            this.txtMinutes.Size = new System.Drawing.Size(120, 30);
+            this.txtMinutes.TabIndex = 3;
             // 
             // txtComment
             // 
@@ -193,12 +270,16 @@ namespace EmployeeManagement_Windows.Views
         private CardPanel pnlHeader;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Label lblDescription;
+        private System.Windows.Forms.ComboBox cmbStatus;
         private StatusBadge badgeStatus;
+        private ModernButton btnSaveStatus;
         private System.Windows.Forms.FlowLayoutPanel pnlComments;
         private CardPanel pnlInput;
         private System.Windows.Forms.TextBox txtComment;
         private ModernButton btnSend;
         private System.Windows.Forms.Label lblActivityTitle;
         private System.Windows.Forms.Button btnBack;
+        private EmployeeManagement_Windows.Controls.ModernTextBox txtHours;
+        private EmployeeManagement_Windows.Controls.ModernTextBox txtMinutes;
     }
 }

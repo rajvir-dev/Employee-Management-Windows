@@ -64,21 +64,21 @@ namespace EmployeeManagement_Windows.Views
                     int targetWidth = flowPending.Width > 20 ? flowPending.Width - 25 : 220;
                     card.Width = targetWidth;
 
-                    // Support both ID-based and Name-based mapping for robustness
                     string status = task.Status?.ToLower() ?? "";
                     int statusId = task.StatusId ?? 0;
 
-                    if (statusId == 2 || status.Contains("progress"))
-                    {
-                        flowInProgress.Controls.Add(card);
-                    }
-                    else if (statusId == 3 || status == "completed" || status == "done" || status == "complete" || task.IsCompleted)
+                    // PRIORITIZE COMPLETED STATUS
+                    if (statusId == 3 || status == "completed" || status == "done" || status == "complete" || task.IsCompleted)
                     {
                         flowCompleted.Controls.Add(card);
                     }
+                    else if (statusId == 2 || status.Contains("progress"))
+                    {
+                        flowInProgress.Controls.Add(card);
+                    }
                     else
                     {
-                        // Fallback: Default to Pending for statusId == 1, "pending", or any unknown status
+                        // Default to Pending
                         flowPending.Controls.Add(card);
                     }
                 }

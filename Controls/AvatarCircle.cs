@@ -1,4 +1,4 @@
-﻿using EmployeeManagement_Windows.Helpers;
+using EmployeeManagement_Windows.Helpers;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
@@ -23,6 +23,26 @@ namespace EmployeeManagement_Windows.Controls
             this.BackColor = Color.Transparent;
             this.Size = new Size(40, 40);
             this.Cursor = Cursors.Hand;
+        }
+
+        public void SetImageFromBase64(string base64)
+        {
+            if (string.IsNullOrEmpty(base64))
+            {
+                this.Image = null;
+                return;
+            }
+
+            try
+            {
+                if (base64.Contains(",")) base64 = base64.Split(',')[1];
+                byte[] imageBytes = System.Convert.FromBase64String(base64);
+                using (var ms = new System.IO.MemoryStream(imageBytes))
+                {
+                    this.Image = Image.FromStream(ms);
+                }
+            }
+            catch { this.Image = null; }
         }
 
         protected override void OnPaint(PaintEventArgs e)

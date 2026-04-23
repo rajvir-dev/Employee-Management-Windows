@@ -1,4 +1,4 @@
-﻿using EmployeeManagement_Windows.Helpers;
+using EmployeeManagement_Windows.Helpers;
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -11,6 +11,9 @@ namespace EmployeeManagement_Windows.Controls
         private TextBox _textBox;
         private Label _lblLabel;
         private bool _isFocused = false;
+        private string _placeholderText = "";
+        private bool _numericOnly = false;
+        private int _maxValue = 0;
 
         public event EventHandler TextChanged;
 
@@ -40,7 +43,24 @@ namespace EmployeeManagement_Windows.Controls
 
             _textBox.GotFocus += (s, e) => { _isFocused = true; this.Invalidate(); };
             _textBox.LostFocus += (s, e) => { _isFocused = false; this.Invalidate(); };
-            _textBox.TextChanged += (s, e) => TextChanged?.Invoke(this, e);
+            _textBox.TextChanged += (s, e) => {
+                if (_numericOnly && int.TryParse(_textBox.Text, out int val))
+                {
+                    if (_maxValue > 0 && val > _maxValue)
+                    {
+                        _textBox.Text = _maxValue.ToString();
+                        _textBox.SelectionStart = _textBox.Text.Length;
+                    }
+                }
+                TextChanged?.Invoke(this, e);
+            };
+
+            _textBox.KeyPress += (s, e) => {
+                if (_numericOnly && !char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                {
+                    e.Handled = true;
+                }
+            };
 
             this.Controls.Add(_lblLabel);
             this.Controls.Add(_textBox);
@@ -58,6 +78,24 @@ namespace EmployeeManagement_Windows.Controls
         {
             get => _lblLabel.Text;
             set => _lblLabel.Text = value;
+        }
+
+        public string PlaceholderText
+        {
+            get => _placeholderText;
+            set { _placeholderText = value; this.Invalidate(); }
+        }
+
+        public bool NumericOnly
+        {
+            get => _numericOnly;
+            set => _numericOnly = value;
+        }
+
+        public int MaxValue
+        {
+            get => _maxValue;
+            set => _maxValue = value;
         }
 
         public bool PasswordChar
@@ -111,6 +149,14 @@ namespace EmployeeManagement_Windows.Controls
                 {
                     g.DrawPath(pen, path);
                 }
+            }
+
+            // Draw Placeholder
+            if (!_isFocused && string.IsNullOrEmpty(_textBox.Text) && !string.IsNullOrEmpty(PlaceholderText))
+            {
+                TextRenderer.DrawText(g, PlaceholderText, _textBox.Font, 
+                    new Rectangle(12, topOffset + ((this.Height - topOffset - _textBox.Height) / 2), this.Width - 20, _textBox.Height),
+                    Color.Gray, TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
             }
         }
 

@@ -21,6 +21,7 @@ namespace EmployeeManagement_Windows.Models
         public string MeetingTitle { get; set; } = string.Empty;
         public DateTime? MeetingDateTime { get; set; }
         public string Status { get; set; } = string.Empty;
+        public string StatusText { get; set; } = string.Empty;
     }
 
     /// <summary>

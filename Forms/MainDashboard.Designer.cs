@@ -88,6 +88,7 @@ namespace EmployeeManagement_Windows.Forms
             this.btnMeeting.Size = new System.Drawing.Size(120, 60);
             this.btnMeeting.TabIndex = 1;
             this.btnMeeting.Text = "Meeting";
+            this.btnMeeting.Click += new System.EventHandler(this.btnMeeting_Click);
 
             // btnLeaves
             this.btnLeaves.BackColor = System.Drawing.Color.Transparent;

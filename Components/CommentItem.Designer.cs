@@ -21,6 +21,7 @@ namespace EmployeeManagement_Windows.Components
             this.lblAuthor = new System.Windows.Forms.Label();
             this.lblText = new System.Windows.Forms.Label();
             this.lblTime = new System.Windows.Forms.Label();
+            this.lblWorked = new System.Windows.Forms.Label();
             this.cardBubble.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -29,6 +30,7 @@ namespace EmployeeManagement_Windows.Components
             this.cardBubble.BackColor = System.Drawing.Color.Transparent;
             this.cardBubble.BorderRadius = 15;
             this.cardBubble.CardColor = System.Drawing.Color.White;
+            this.cardBubble.Controls.Add(this.lblWorked);
             this.cardBubble.Controls.Add(this.lblTime);
             this.cardBubble.Controls.Add(this.lblText);
             this.cardBubble.Controls.Add(this.lblAuthor);
@@ -37,8 +39,21 @@ namespace EmployeeManagement_Windows.Components
             this.cardBubble.Name = "cardBubble";
             this.cardBubble.Padding = new System.Windows.Forms.Padding(10);
             this.cardBubble.ShadowSize = 3;
-            this.cardBubble.Size = new System.Drawing.Size(400, 80);
+            this.cardBubble.Size = new System.Drawing.Size(400, 100);
             this.cardBubble.TabIndex = 0;
+            // 
+            // lblWorked
+            // 
+            this.lblWorked.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblWorked.AutoSize = true;
+            this.lblWorked.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.lblWorked.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(45)))), ((int)(((byte)(226)))));
+            this.lblWorked.Location = new System.Drawing.Point(280, 75);
+            this.lblWorked.Name = "lblWorked";
+            this.lblWorked.Size = new System.Drawing.Size(100, 13);
+            this.lblWorked.TabIndex = 3;
+            this.lblWorked.Text = "🕒 2hrs 30min worked";
+            this.lblWorked.Visible = false;
             // 
             // lblAuthor
             // 
@@ -81,7 +96,7 @@ namespace EmployeeManagement_Windows.Components
             this.Controls.Add(this.cardBubble);
             this.Name = "CommentItem";
             this.Padding = new System.Windows.Forms.Padding(5);
-            this.Size = new System.Drawing.Size(400, 80);
+            this.Size = new System.Drawing.Size(400, 100);
             this.cardBubble.ResumeLayout(false);
             this.cardBubble.PerformLayout();
             this.ResumeLayout(false);
@@ -92,5 +107,6 @@ namespace EmployeeManagement_Windows.Components
         private System.Windows.Forms.Label lblAuthor;
         private System.Windows.Forms.Label lblText;
         private System.Windows.Forms.Label lblTime;
+        private System.Windows.Forms.Label lblWorked;
     }
 }
