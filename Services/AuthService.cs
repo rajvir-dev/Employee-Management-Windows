@@ -21,6 +21,18 @@ namespace EmployeeManagement_Windows.Services
                 response.FullName,
                 response.EmployeeType);
 
+            // Fetch full profile to get the photo
+            try
+            {
+                var profile = await EmployeeService.GetProfileAsync();
+                if (profile != null && !string.IsNullOrEmpty(profile.PhotoBase64))
+                {
+                    SessionManager.PhotoBase64 = profile.PhotoBase64;
+                    SessionManager.SaveSession();
+                }
+            }
+            catch { /* Ignore profile fetch errors during login */ }
+
             return response;
         }
 

@@ -205,6 +205,11 @@ namespace EmployeeManagement_Windows.Views
                 var result = await EmployeeService.UpdateProfileAsync(request);
                 if (result.Success)
                 {
+                    // Update session storage with new photo
+                    SessionManager.PhotoBase64 = request.PhotoBase64;
+                    SessionManager.SaveSession();
+
+                    OnProfileUpdated?.Invoke();
                     MessageBox.Show("Profile updated successfully!");
                     await LoadProfileAsync();
                     if (this.IsDisposed) return;

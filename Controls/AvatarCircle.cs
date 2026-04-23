@@ -39,7 +39,9 @@ namespace EmployeeManagement_Windows.Controls
                 byte[] imageBytes = System.Convert.FromBase64String(base64);
                 using (var ms = new System.IO.MemoryStream(imageBytes))
                 {
-                    this.Image = Image.FromStream(ms);
+                    var loadedImg = Image.FromStream(ms);
+                    this.Image = new Bitmap(loadedImg); // Create a copy so we can dispose the stream
+                    loadedImg.Dispose();
                 }
             }
             catch { this.Image = null; }
