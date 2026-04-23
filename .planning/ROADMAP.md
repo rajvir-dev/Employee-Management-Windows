@@ -22,10 +22,11 @@
   - Implement comment posting and time logging logic.
   - Integrated navigation (Kanban <-> Details).
 
-### Phase 7: Profile & Leave Management
-- Create `ProfileView` UserControl.
-- Create `LeaveRequestForm`.
-- Implement profile update and leave submission logic.
+### Phase 07: Profile & Leave Management (✅)
+- Implement `LeaveType` in models.
+- Apply "Catppuccin Mocha" Dark Mode theme.
+- Update `ProfileView` and `LeaveRequestForm` with new UI specs.
+- Enhance `LeaveItem` with status-colored badges.
 - **Depends on**: Phase 3
 
 ### Phase 8: Real-time Polishing
@@ -41,12 +42,12 @@
 ### Phase 10: Final Documentation
 - Setup guide and architecture documentation.
 
-### Phase 11: v1.0 Stabilization
+### Phase 11: v1.0 Stabilization (✅)
 - Fix session persistence (profile photo loss).
 - Fix Kanban status mapping and rendering.
 - Verify async loading stability.
 - **Gap Closure**: Closes gaps from v1.0 Audit.
 
-### Phase 12: v1.0 Documentation Recovery
+### Phase 12: v1.0 Documentation Recovery (✅)
 - Generate `SUMMARY.md` and `VERIFICATION.md` for Phases 0-6.
 - **Gap Closure**: Closes documentation gaps from v1.0 Audit.

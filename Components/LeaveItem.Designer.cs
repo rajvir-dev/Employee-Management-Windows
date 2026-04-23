@@ -18,9 +18,9 @@ namespace EmployeeManagement_Windows.Components
             this.lblType = new System.Windows.Forms.Label();
             this.lblDates = new System.Windows.Forms.Label();
             this.lblReason = new System.Windows.Forms.Label();
-            this.badgeStatus = new EmployeeManagement_Windows.CustomControls.StatusBadge();
-            this.btnEdit = new EmployeeManagement_Windows.CustomControls.ModernButton();
-            this.pnlContainer = new EmployeeManagement_Windows.CustomControls.CardPanel();
+            this.badgeStatus = new EmployeeManagement_Windows.Controls.StatusBadge();
+            this.btnEdit = new EmployeeManagement_Windows.Controls.ModernButton();
+            this.pnlContainer = new EmployeeManagement_Windows.Controls.CardPanel();
             this.pnlContainer.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -126,8 +126,8 @@ namespace EmployeeManagement_Windows.Components
         private System.Windows.Forms.Label lblType;
         private System.Windows.Forms.Label lblDates;
         private System.Windows.Forms.Label lblReason;
-        private EmployeeManagement_Windows.CustomControls.StatusBadge badgeStatus;
-        private EmployeeManagement_Windows.CustomControls.ModernButton btnEdit;
-        private EmployeeManagement_Windows.CustomControls.CardPanel pnlContainer;
+        private EmployeeManagement_Windows.Controls.StatusBadge badgeStatus;
+        private EmployeeManagement_Windows.Controls.ModernButton btnEdit;
+        private EmployeeManagement_Windows.Controls.CardPanel pnlContainer;
     }
 }

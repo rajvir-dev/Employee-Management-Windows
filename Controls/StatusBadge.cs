@@ -3,11 +3,13 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
-namespace EmployeeManagement_Windows.CustomControls
+namespace EmployeeManagement_Windows.Controls
 {
     public class StatusBadge : Control
     {
         public Color BadgeColor { get; set; } = Color.FromArgb(142, 45, 226);
+        public Color TextColor { get; set; } = Color.White;
+        
         public override string Text { get; set; } = "STATUS";
 
         public StatusBadge()
@@ -20,6 +22,13 @@ namespace EmployeeManagement_Windows.CustomControls
             this.BackColor = Color.Transparent;
             this.Size = new Size(100, 25);
             this.DoubleBuffered = true;
+        }
+
+        public void SetTheme((Color bg, Color text) theme)
+        {
+            this.BadgeColor = theme.bg;
+            this.TextColor = theme.text;
+            this.Invalidate();
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -39,21 +48,16 @@ namespace EmployeeManagement_Windows.CustomControls
             // 2. Draw Background
             using (GraphicsPath path = GetRoundedRect(rect, radius))
             {
-                this.Region = new Region(path);
+                this.Region = new Region(GetRoundedRect(new Rectangle(0, 0, this.Width, this.Height), radius));
 
-                using (SolidBrush brush = new SolidBrush(Color.FromArgb(30, BadgeColor)))
+                using (SolidBrush brush = new SolidBrush(BadgeColor))
                 {
                     g.FillPath(brush, path);
-                }
-                
-                using (Pen pen = new Pen(BadgeColor, 1))
-                {
-                    g.DrawPath(pen, path);
                 }
             }
 
             // 3. Draw Text
-            TextRenderer.DrawText(g, this.Text.ToUpper(), new Font("Segoe UI", 8F, FontStyle.Bold), rect, BadgeColor, TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+            TextRenderer.DrawText(g, this.Text, new Font("Segoe UI", 9F, FontStyle.Bold), rect, TextColor, TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter | TextFormatFlags.SingleLine);
         }
 
         private Color GetEffectiveBackColor()

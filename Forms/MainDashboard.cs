@@ -21,7 +21,8 @@ namespace EmployeeManagement_Windows.Forms
 
         private void SetupDashboard()
         {
-            lblUserName.Text = SessionManager.FullName ?? "User";
+            // Placeholder avatar logic
+            // avatar.Image = ...
             ShowKanban();
         }
 
@@ -78,19 +79,17 @@ namespace EmployeeManagement_Windows.Forms
             pnlMainContent.Controls.Add(details);
         }
 
-        private void SetButtonActive(EmployeeManagement_Windows.CustomControls.ModernButton activeBtn)
+        private void SetButtonActive(EmployeeManagement_Windows.Controls.TabButton activeBtn)
         {
-            // Inactive state: Subtle dark purple or transparent
-            btnKanban.GradientStart = Color.Transparent;
-            btnKanban.GradientEnd = Color.Transparent;
-            btnProfile.GradientStart = Color.Transparent;
-            btnProfile.GradientEnd = Color.Transparent;
-            btnLeaves.GradientStart = Color.Transparent;
-            btnLeaves.GradientEnd = Color.Transparent;
+            btnKanban.IsActive = false;
+            btnProfile.IsActive = false;
+            btnLeaves.IsActive = false;
+            btnMeeting.IsActive = false;
 
-            // Active state: Vibrant Purple Gradient
-            activeBtn.GradientStart = Color.FromArgb(142, 45, 226);
-            activeBtn.GradientEnd = Color.FromArgb(74, 0, 224);
+            if (activeBtn != null)
+            {
+                activeBtn.IsActive = true;
+            }
         }
 
         private void btnKanban_Click(object sender, EventArgs e) => ShowKanban();

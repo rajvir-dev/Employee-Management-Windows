@@ -1,25 +1,38 @@
+﻿using EmployeeManagement_Windows.Controls;
+using EmployeeManagement_Windows.Helpers;
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
-namespace EmployeeManagement_Windows.CustomControls
+namespace EmployeeManagement_Windows.Controls
 {
+    public enum ButtonStyle
+    {
+        Primary,
+        Dark,
+        Outline
+    }
+
     public class ModernButton : Button
     {
-        public int BorderRadius { get; set; } = 10;
-        public Color GradientStart { get; set; } = Color.FromArgb(142, 45, 226); // Purple
-        public Color GradientEnd { get; set; } = Color.FromArgb(74, 0, 224);   // Deep Purple
-        
+        public int BorderRadius { get; set; } = 8;
+
+        // Dummy properties to prevent Designer from crashing on older forms
+        public Color GradientStart { get; set; }
+        public Color GradientEnd { get; set; }
+
+        public ButtonStyle Style { get; set; } = ButtonStyle.Primary;
+
         private bool _isHovered = false;
 
         public ModernButton()
         {
-            this.SetStyle(ControlStyles.SupportsTransparentBackColor | 
-                          ControlStyles.UserPaint | 
-                          ControlStyles.AllPaintingInWmPaint | 
+            this.SetStyle(ControlStyles.SupportsTransparentBackColor |
+                          ControlStyles.UserPaint |
+                          ControlStyles.AllPaintingInWmPaint |
                           ControlStyles.OptimizedDoubleBuffer, true);
-            
+
             this.FlatStyle = FlatStyle.Flat;
             this.FlatAppearance.BorderSize = 0;
             this.BackColor = Color.Transparent;
@@ -48,33 +61,59 @@ namespace EmployeeManagement_Windows.CustomControls
             Graphics g = pevent.Graphics;
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
-            // 1. Force clear the background with the actual solid color of the parent
+            // Force clear the background with the actual solid color of the parent
             Color backColor = GetEffectiveBackColor();
             using (var brush = new SolidBrush(backColor))
             {
-                g.Clear(backColor); // Completely clear the surface
+                g.Clear(backColor);
             }
 
-            Rectangle rect = new Rectangle(0, 0, this.Width, this.Height);
+            Rectangle rect = new Rectangle(0, 0, this.Width - 1, this.Height - 1);
             if (rect.Width <= 1 || rect.Height <= 1) return;
 
             using (GraphicsPath path = GetRoundedRect(rect, BorderRadius))
             {
-                this.Region = new Region(path);
+                this.Region = new Region(GetRoundedRect(new Rectangle(0, 0, this.Width, this.Height), BorderRadius));
 
-                Color start = _isHovered ? LightenColor(GradientStart, 10) : GradientStart;
-                Color end = _isHovered ? LightenColor(GradientEnd, 10) : GradientEnd;
+                Color fillColor = ThemeColors.Primary;
+                Color textColor = Color.White;
+                Color borderColor = Color.Transparent;
 
-                if (start != Color.Transparent || end != Color.Transparent)
+                switch (Style)
                 {
-                    using (LinearGradientBrush brush = new LinearGradientBrush(rect, start, end, LinearGradientMode.Vertical))
+                    case ButtonStyle.Primary:
+                        fillColor = _isHovered ? ThemeColors.PrimaryDark : ThemeColors.Primary;
+                        textColor = Color.White;
+                        break;
+                    case ButtonStyle.Dark:
+                        fillColor = _isHovered ? LightenColor(ThemeColors.DarkButton, 20) : ThemeColors.DarkButton;
+                        textColor = Color.White;
+                        break;
+                    case ButtonStyle.Outline:
+                        fillColor = _isHovered ? Color.FromArgb(10, ThemeColors.Primary) : Color.White;
+                        textColor = ThemeColors.Primary;
+                        borderColor = ThemeColors.Primary;
+                        break;
+                }
+
+                // Fill background
+                using (SolidBrush brush = new SolidBrush(fillColor))
+                {
+                    g.FillPath(brush, path);
+                }
+
+                // Draw border for Outline style
+                if (Style == ButtonStyle.Outline)
+                {
+                    using (Pen pen = new Pen(borderColor, 1))
                     {
-                        g.FillPath(brush, path);
+                        g.DrawPath(pen, path);
                     }
                 }
 
+                // Draw Text
                 TextFormatFlags flags = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter | TextFormatFlags.SingleLine;
-                TextRenderer.DrawText(g, this.Text, this.Font, rect, this.ForeColor, flags);
+                TextRenderer.DrawText(g, this.Text, this.Font, rect, textColor, flags);
             }
         }
 
@@ -83,7 +122,6 @@ namespace EmployeeManagement_Windows.CustomControls
             Control parent = this.Parent;
             while (parent != null && parent.BackColor == Color.Transparent)
             {
-                // If it's a CardPanel, use its CardColor instead of BackColor
                 if (parent is CardPanel card) return card.CardColor;
                 parent = parent.Parent;
             }
@@ -92,7 +130,6 @@ namespace EmployeeManagement_Windows.CustomControls
 
         private Color LightenColor(Color color, int percent)
         {
-            if (color == Color.Transparent) return Color.Transparent;
             return Color.FromArgb(
                 Math.Min(255, color.R + (255 - color.R) * percent / 100),
                 Math.Min(255, color.G + (255 - color.G) * percent / 100),

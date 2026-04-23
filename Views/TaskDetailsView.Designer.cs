@@ -1,7 +1,7 @@
 namespace EmployeeManagement_Windows.Views
 {
     using System.Windows.Forms;
-    using EmployeeManagement_Windows.CustomControls;
+    using EmployeeManagement_Windows.Controls;
 
     partial class TaskDetailsView
     {

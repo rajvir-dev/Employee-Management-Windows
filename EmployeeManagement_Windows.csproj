@@ -52,6 +52,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\AvatarCircle.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\CardPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ModernButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ModernCard.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ModernTextBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\TabButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Core\ApiClient.cs" />
     <Compile Include="Core\SessionManager.cs" />
     <Compile Include="Core\SignalRService.cs" />
@@ -70,20 +88,8 @@
     <Compile Include="Services\LeaveService.cs" />
     <Compile Include="Services\NotificationService.cs" />
     <Compile Include="Services\TaskService.cs" />
-    <Compile Include="Controls\CardPanel.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\ModernButton.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Controls\StatusBadge.cs">
       <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\ModernCard.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\ModernTextBox.cs">
-      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Components\CommentItem.cs">
       <SubType>UserControl</SubType>

@@ -1,10 +1,10 @@
+﻿using EmployeeManagement_Windows.Helpers;
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
-using EmployeeManagement_Windows.Helpers;
 
-namespace EmployeeManagement_Windows.CustomControls
+namespace EmployeeManagement_Windows.Controls
 {
     public class ModernCard : Panel
     {
@@ -12,19 +12,19 @@ namespace EmployeeManagement_Windows.CustomControls
         public int ShadowSize { get; set; } = 5;
         public Color CardColor { get; set; } = Color.White;
         public string Title { get; set; } = "";
-        
+
         private Label _lblTitle;
 
         public ModernCard()
         {
-            this.SetStyle(ControlStyles.UserPaint | 
-                          ControlStyles.AllPaintingInWmPaint | 
+            this.SetStyle(ControlStyles.UserPaint |
+                          ControlStyles.AllPaintingInWmPaint |
                           ControlStyles.OptimizedDoubleBuffer |
                           ControlStyles.SupportsTransparentBackColor, true);
-            
+
             this.BackColor = Color.Transparent;
             this.Padding = new Padding(20, 45, 20, 20); // Top padding leaves space for title
-            
+
             _lblTitle = new Label
             {
                 Text = this.Title,

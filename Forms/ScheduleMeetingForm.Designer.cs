@@ -1,6 +1,6 @@
 namespace EmployeeManagement_Windows.Forms
 {
-    using EmployeeManagement_Windows.CustomControls;
+    using EmployeeManagement_Windows.Controls;
 
     partial class ScheduleMeetingForm
     {

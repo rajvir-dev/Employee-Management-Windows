@@ -29,18 +29,18 @@ namespace EmployeeManagement_Windows.Components
             switch (_leave.IsApproved)
             {
                 case 1:
-                    badgeStatus.Text = "APPROVED";
-                    badgeStatus.BadgeColor = ThemeColors.Success;
+                    badgeStatus.Text = "Approved";
+                    badgeStatus.SetTheme(ThemeColors.StatusBadgeColors.Approved);
                     btnEdit.Visible = false;
                     break;
                 case 2:
-                    badgeStatus.Text = "REJECTED";
-                    badgeStatus.BadgeColor = ThemeColors.Danger;
+                    badgeStatus.Text = "Rejected";
+                    badgeStatus.SetTheme(ThemeColors.StatusBadgeColors.Rejected);
                     btnEdit.Visible = false;
                     break;
                 default:
-                    badgeStatus.Text = "PENDING";
-                    badgeStatus.BadgeColor = ThemeColors.Warning;
+                    badgeStatus.Text = "Pending";
+                    badgeStatus.SetTheme(ThemeColors.StatusBadgeColors.Pending);
                     btnEdit.Visible = true;
                     break;
             }

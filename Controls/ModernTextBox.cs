@@ -1,9 +1,10 @@
+﻿using EmployeeManagement_Windows.Helpers;
 using System;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
-using EmployeeManagement_Windows.Helpers;
 
-namespace EmployeeManagement_Windows.CustomControls
+namespace EmployeeManagement_Windows.Controls
 {
     public class ModernTextBox : UserControl
     {
@@ -15,9 +16,11 @@ namespace EmployeeManagement_Windows.CustomControls
 
         public ModernTextBox()
         {
-            this.Size = new Size(250, 45);
-            this.BackColor = Color.White;
-            
+            this.Size = new Size(250, 60);
+            this.BackColor = Color.Transparent;
+            this.DoubleBuffered = true;
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint, true);
+
             _lblLabel = new Label
             {
                 Text = "Label",
@@ -32,9 +35,7 @@ namespace EmployeeManagement_Windows.CustomControls
                 BorderStyle = BorderStyle.None,
                 Font = new Font("Segoe UI", 10F),
                 ForeColor = ThemeColors.TextPrimary,
-                Location = new Point(5, 20),
-                Width = this.Width - 10,
-                Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top
+                BackColor = Color.White
             };
 
             _textBox.GotFocus += (s, e) => { _isFocused = true; this.Invalidate(); };
@@ -43,6 +44,8 @@ namespace EmployeeManagement_Windows.CustomControls
 
             this.Controls.Add(_lblLabel);
             this.Controls.Add(_textBox);
+
+            UpdateLayout();
         }
 
         public override string Text
@@ -72,14 +75,14 @@ namespace EmployeeManagement_Windows.CustomControls
         public bool Multiline
         {
             get => _textBox.Multiline;
-            set 
-            { 
+            set
+            {
                 _textBox.Multiline = value;
                 if (value)
                 {
-                    _textBox.Height = this.Height - 30;
                     _textBox.ScrollBars = ScrollBars.Vertical;
                 }
+                UpdateLayout();
             }
         }
 
@@ -87,24 +90,68 @@ namespace EmployeeManagement_Windows.CustomControls
         {
             base.OnPaint(e);
             Graphics g = e.Graphics;
-            
-            Color lineColor = _isFocused ? ThemeColors.Primary : Color.FromArgb(223, 228, 234);
-            int lineHeight = _isFocused ? 2 : 1;
+            g.SmoothingMode = SmoothingMode.AntiAlias;
 
-            using (Pen pen = new Pen(lineColor, lineHeight))
+            int labelHeight = _lblLabel.Height > 0 ? _lblLabel.Height : 20;
+            int topOffset = string.IsNullOrEmpty(_lblLabel.Text) ? 0 : labelHeight + 4;
+
+            Rectangle rect = new Rectangle(0, topOffset, this.Width - 1, this.Height - topOffset - 1);
+            if (rect.Width <= 1 || rect.Height <= 1) return;
+
+            // Draw Background of input box
+            using (GraphicsPath path = GetRoundedRect(rect, 6))
             {
-                g.DrawLine(pen, 0, this.Height - 1, this.Width, this.Height - 1);
+                using (SolidBrush brush = new SolidBrush(Color.White))
+                {
+                    g.FillPath(brush, path);
+                }
+
+                Color borderColor = _isFocused ? ThemeColors.Primary : ThemeColors.BorderColor;
+                using (Pen pen = new Pen(borderColor, 1))
+                {
+                    g.DrawPath(pen, path);
+                }
             }
         }
 
         protected override void OnResize(EventArgs e)
         {
             base.OnResize(e);
-            if (_textBox != null)
+            UpdateLayout();
+        }
+
+        private void UpdateLayout()
+        {
+            if (_textBox == null || _lblLabel == null) return;
+
+            int labelHeight = _lblLabel.Height > 0 ? _lblLabel.Height : 20;
+            int topOffset = string.IsNullOrEmpty(_lblLabel.Text) ? 0 : labelHeight + 4;
+
+            if (Multiline)
             {
-                _textBox.Width = this.Width - 10;
-                if (_textBox.Multiline) _textBox.Height = this.Height - 30;
+                _textBox.Location = new Point(8, topOffset + 8);
+                _textBox.Size = new Size(this.Width - 16, this.Height - topOffset - 16);
             }
+            else
+            {
+                int textBoxTop = topOffset + ((this.Height - topOffset - _textBox.Height) / 2);
+                _textBox.Location = new Point(8, textBoxTop);
+                _textBox.Size = new Size(this.Width - 16, _textBox.Height);
+            }
+        }
+
+        private GraphicsPath GetRoundedRect(Rectangle rect, int radius)
+        {
+            GraphicsPath path = new GraphicsPath();
+            int d = Math.Min(radius * 2, Math.Min(rect.Width, rect.Height));
+            if (d < 1) d = 1;
+
+            path.AddArc(rect.X, rect.Y, d, d, 180, 90);
+            path.AddArc(rect.Right - d, rect.Y, d, d, 270, 90);
+            path.AddArc(rect.Right - d, rect.Bottom - d, d, d, 0, 90);
+            path.AddArc(rect.X, rect.Bottom - d, d, d, 90, 90);
+            path.CloseFigure();
+            return path;
         }
     }
 }

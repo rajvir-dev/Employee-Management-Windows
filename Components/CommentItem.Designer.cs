@@ -1,6 +1,6 @@
 namespace EmployeeManagement_Windows.Components
 {
-    using EmployeeManagement_Windows.CustomControls;
+    using EmployeeManagement_Windows.Controls;
 
     partial class CommentItem
     {

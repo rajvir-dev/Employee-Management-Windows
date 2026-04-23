@@ -30,23 +30,23 @@ namespace EmployeeManagement_Windows.Components
             
             // Priority Color Logic
             string priorityLower = priority.ToLower();
-            if (priorityLower == "high") lblPriority.ForeColor = Color.FromArgb(214, 48, 49);
-            else if (priorityLower == "medium") lblPriority.ForeColor = Color.FromArgb(253, 150, 68);
-            else lblPriority.ForeColor = Color.FromArgb(0, 184, 148);
+            if (priorityLower == "high") lblPriority.ForeColor = ThemeColors.Danger;
+            else if (priorityLower == "medium") lblPriority.ForeColor = ThemeColors.Warning;
+            else lblPriority.ForeColor = ThemeColors.Success;
 
             // Status Badge
             badgeStatus.Text = _task.Status ?? "Pending";
-            badgeStatus.BadgeColor = GetStatusColor(_task.StatusId ?? 0);
+            badgeStatus.SetTheme(GetStatusTheme(_task.StatusId ?? 0));
         }
 
-        private Color GetStatusColor(int statusId)
+        private (Color bg, Color text) GetStatusTheme(int statusId)
         {
             switch (statusId)
             {
-                case 1: return ThemeColors.TextSecondary; // Pending
-                case 2: return ThemeColors.Warning;       // In Progress
-                case 3: return ThemeColors.Success;       // Completed
-                default: return ThemeColors.Primary;
+                case 1: return ThemeColors.StatusBadgeColors.Pending;    // To Do
+                case 2: return ThemeColors.StatusBadgeColors.InProgress; // In Progress
+                case 3: return ThemeColors.StatusBadgeColors.Approved;   // Completed
+                default: return ThemeColors.StatusBadgeColors.Pending;
             }
         }
 
