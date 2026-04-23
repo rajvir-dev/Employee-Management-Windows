@@ -11,6 +11,7 @@ namespace EmployeeManagement_Windows.Models
         public string Description { get; set; } = string.Empty;
         public DateTime LeaveDate { get; set; }
         public DateTime LeaveEndDate { get; set; }
+        public int LeaveType { get; set; }
     }
 
     /// <summary>
@@ -30,6 +31,7 @@ namespace EmployeeManagement_Windows.Models
         public int IsApproved { get; set; }
         public string Remarks { get; set; } = string.Empty;
         public DateTime? CreatedDate { get; set; }
+        public int LeaveType { get; set; }
 
         public string StatusText
         {
@@ -41,6 +43,20 @@ namespace EmployeeManagement_Windows.Models
                     case 1: return "Approved";
                     case 2: return "Rejected";
                     default: return "Unknown";
+                }
+            }
+        }
+
+        public string LeaveTypeName
+        {
+            get
+            {
+                switch (LeaveType)
+                {
+                    case 0: return "Vacation";
+                    case 1: return "Sick";
+                    case 2: return "Other";
+                    default: return "Other";
                 }
             }
         }
