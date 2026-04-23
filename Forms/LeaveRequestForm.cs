@@ -50,6 +50,16 @@ namespace EmployeeManagement_Windows.Forms
             txtReason.Text = _existingLeave.Description;
             dtpStart.Value = _existingLeave.LeaveDate;
             dtpEnd.Value = _existingLeave.LeaveEndDate;
+            
+            // Map LeaveType to ComboBox index (0, 1, 2)
+            if (_existingLeave.LeaveType >= 0 && _existingLeave.LeaveType <= 2)
+            {
+                cmbLeaveType.SelectedIndex = _existingLeave.LeaveType;
+            }
+            else
+            {
+                cmbLeaveType.SelectedIndex = 2; // Default to Other
+            }
         }
 
         private async void btnSubmit_Click(object sender, EventArgs e)
@@ -59,7 +69,8 @@ namespace EmployeeManagement_Windows.Forms
                 LeaveId = _isEditMode ? _existingLeave.LeaveId : (long?)null,
                 Description = txtReason.Text.Trim(),
                 LeaveDate = dtpStart.Value,
-                LeaveEndDate = dtpEnd.Value
+                LeaveEndDate = dtpEnd.Value,
+                LeaveType = cmbLeaveType.SelectedIndex >= 0 ? cmbLeaveType.SelectedIndex : 2
             };
 
             if (string.IsNullOrEmpty(request.Description))
