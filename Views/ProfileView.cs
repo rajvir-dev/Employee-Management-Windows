@@ -30,6 +30,8 @@ namespace EmployeeManagement_Windows.Views
             try
             {
                 _currentEmployee = await EmployeeService.GetProfileAsync();
+                if (this.IsDisposed) return;
+
                 if (_currentEmployee != null)
                 {
                     // Basic Info
@@ -54,11 +56,20 @@ namespace EmployeeManagement_Windows.Views
                     txtConfirmPassword.Text = _currentEmployee.Password;
 
                     // Photo
-                    _selectedPhotoBase64 = CleanBase64(_currentEmployee.PhotoBase64);
-                    
-                    // Update session cache
-                    SessionManager.PhotoBase64 = _selectedPhotoBase64;
-                    SessionManager.SaveSession();
+                    var apiPhoto = CleanBase64(_currentEmployee.PhotoBase64);
+                    if (!string.IsNullOrEmpty(apiPhoto))
+                    {
+                        _selectedPhotoBase64 = apiPhoto;
+                        
+                        // Update session cache
+                        SessionManager.PhotoBase64 = _selectedPhotoBase64;
+                        SessionManager.SaveSession();
+                    }
+                    else if (!string.IsNullOrEmpty(SessionManager.PhotoBase64))
+                    {
+                        // Keep the local cached photo if API returns empty
+                        _selectedPhotoBase64 = SessionManager.PhotoBase64;
+                    }
 
                     if (!string.IsNullOrEmpty(_selectedPhotoBase64))
                     {
@@ -146,6 +157,7 @@ namespace EmployeeManagement_Windows.Views
                 {
                     MessageBox.Show("Profile updated successfully!");
                     await LoadProfileAsync();
+                    if (this.IsDisposed) return;
                 }
                 else
                 {

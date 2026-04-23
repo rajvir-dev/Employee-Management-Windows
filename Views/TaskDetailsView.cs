@@ -39,6 +39,8 @@ namespace EmployeeManagement_Windows.Views
             try
             {
                 var comments = await TaskService.GetCommentsAsync(_task.EncryptedId);
+                if (this.IsDisposed) return;
+
                 foreach (var comment in comments)
                 {
                     var item = new CommentItem(comment);

@@ -47,6 +47,7 @@ namespace EmployeeManagement_Windows.Views
             try
             {
                 var tasks = await TaskService.GetMyTasksAsync();
+                if (this.IsDisposed) return;
                 
                 flowPending.Controls.Clear();
                 flowInProgress.Controls.Clear();
@@ -67,17 +68,18 @@ namespace EmployeeManagement_Windows.Views
                     string status = task.Status?.ToLower() ?? "";
                     int statusId = task.StatusId ?? 0;
 
-                    if (statusId == 1 || status == "pending")
-                    {
-                        flowPending.Controls.Add(card);
-                    }
-                    else if (statusId == 2 || status == "in progress" || status == "inprogress")
+                    if (statusId == 2 || status.Contains("progress"))
                     {
                         flowInProgress.Controls.Add(card);
                     }
                     else if (statusId == 3 || status == "completed" || status == "done" || status == "complete" || task.IsCompleted)
                     {
                         flowCompleted.Controls.Add(card);
+                    }
+                    else
+                    {
+                        // Fallback: Default to Pending for statusId == 1, "pending", or any unknown status
+                        flowPending.Controls.Add(card);
                     }
                 }
             }
@@ -90,6 +92,7 @@ namespace EmployeeManagement_Windows.Views
         private async void btnRefresh_Click(object sender, EventArgs e)
         {
             await LoadTasks();
+            if (this.IsDisposed) return;
         }
     }
 }
