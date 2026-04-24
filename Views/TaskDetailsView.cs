@@ -183,8 +183,8 @@ namespace EmployeeManagement_Windows.Views
 
         private void btnToggleComments_Click(object sender, EventArgs e)
         {
-            bool isVisible = !pnlCommentsContainer.Visible;
-            pnlCommentsContainer.Visible = isVisible;
+            bool isVisible = !pnlComments.Visible;
+            pnlComments.Visible = isVisible;
             pnlInput.Visible = isVisible;
 
             if (isVisible)
@@ -287,6 +287,11 @@ namespace EmployeeManagement_Windows.Views
         private void btnBack_Click(object sender, EventArgs e)
         {
             OnBack?.Invoke();
+        }
+
+        private void txtMinutes_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -23,12 +23,14 @@ namespace EmployeeManagement_Windows.Components
             this.cardBubble = new EmployeeManagement_Windows.Controls.CardPanel();
             this.lblText = new System.Windows.Forms.Label();
             this.lblWorked = new System.Windows.Forms.Label();
+            this.lblAuthor = new System.Windows.Forms.Label();
             this.pnlMain.SuspendLayout();
             this.cardBubble.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlMain
             // 
+            this.pnlMain.Controls.Add(this.lblAuthor);
             this.pnlMain.Controls.Add(this.lblTime);
             this.pnlMain.Controls.Add(this.picAvatar);
             this.pnlMain.Controls.Add(this.cardBubble);
@@ -55,9 +57,9 @@ namespace EmployeeManagement_Windows.Components
             // 
             this.picAvatar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.picAvatar.BackColor = System.Drawing.Color.Transparent;
-            this.picAvatar.Location = new System.Drawing.Point(340, 0);
+            this.picAvatar.Location = new System.Drawing.Point(350, 0);
             this.picAvatar.Name = "picAvatar";
-            this.picAvatar.Size = new System.Drawing.Size(40, 40);
+            this.picAvatar.Size = new System.Drawing.Size(32, 32);
             this.picAvatar.TabIndex = 1;
             // 
             // cardBubble
@@ -98,6 +100,17 @@ namespace EmployeeManagement_Windows.Components
             this.lblWorked.TabIndex = 3;
             this.lblWorked.Text = "🕒 3hrs 00min worked";
             // 
+            // lblAuthor
+            // 
+            this.lblAuthor.AutoSize = true;
+            this.lblAuthor.Font = new System.Drawing.Font("Segoe UI Semibold", 8F);
+            this.lblAuthor.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(85)))), ((int)(((byte)(99)))));
+            this.lblAuthor.Location = new System.Drawing.Point(40, 0);
+            this.lblAuthor.Name = "lblAuthor";
+            this.lblAuthor.Size = new System.Drawing.Size(63, 13);
+            this.lblAuthor.TabIndex = 4;
+            this.lblAuthor.Text = "rasik joshi";
+            // 
             // CommentItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -121,5 +134,6 @@ namespace EmployeeManagement_Windows.Components
         private System.Windows.Forms.Label lblText;
         private System.Windows.Forms.Label lblTime;
         private System.Windows.Forms.Label lblWorked;
+        private System.Windows.Forms.Label lblAuthor;
     }
 }

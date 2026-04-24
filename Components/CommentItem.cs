@@ -22,6 +22,7 @@ namespace EmployeeManagement_Windows.Components
         {
             lblText.Text = _comment.CommentText ?? "No content";
             lblTime.Text = _comment.CreatedDate.HasValue ? _comment.CreatedDate.Value.ToString("hh:mm tt") : "";
+            lblAuthor.Text = _comment.AuthorName ?? "Unknown";
 
             if (!string.IsNullOrEmpty(_comment.PhotoBase64))
             {
@@ -44,24 +45,26 @@ namespace EmployeeManagement_Windows.Components
             }
 
             // Apply Layout & Themes
+            int maxBubbleWidth = (int)(pnlMain.Width * 0.7);
+            lblText.MaximumSize = new Size(maxBubbleWidth - 24, 0);
+            cardBubble.Width = lblText.PreferredWidth + 24;
+            cardBubble.Height = lblText.PreferredHeight + 16;
+
             if (isMe)
             {
-                // Align to Right
-                picAvatar.Location = new Point(pnlMain.Width - picAvatar.Width - 5, 0);
-                picAvatar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-
-                lblTime.Location = new Point(picAvatar.Left - lblTime.Width - 8, 0);
+                // RIGHT SIDE (Me)
+                lblAuthor.Visible = false; // Usually don't show your own name in chat bubbles
+                
+                lblTime.Location = new Point(pnlMain.Width - lblTime.Width - 45, 0);
                 lblTime.Anchor = AnchorStyles.Top | AnchorStyles.Right;
 
+                cardBubble.Location = new Point(pnlMain.Width - cardBubble.Width - 45, 15);
                 cardBubble.CardColor = Color.FromArgb(99, 102, 241); // Indigo 500
                 lblText.ForeColor = Color.White;
-                
-                // Adjust bubble width and position
-                int maxBubbleWidth = (int)(pnlMain.Width * 0.7);
-                lblText.MaximumSize = new Size(maxBubbleWidth - 24, 0);
-                cardBubble.Width = lblText.PreferredWidth + 24;
-                cardBubble.Location = new Point(picAvatar.Left - cardBubble.Width - 8, 15);
                 cardBubble.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+
+                picAvatar.Location = new Point(pnlMain.Width - picAvatar.Width - 5, 15);
+                picAvatar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
 
                 if (lblWorked.Visible)
                 {
@@ -71,21 +74,20 @@ namespace EmployeeManagement_Windows.Components
             }
             else
             {
-                // Align to Left
+                // LEFT SIDE (Others)
+                lblAuthor.Visible = true;
+                lblAuthor.Text = $"{_comment.AuthorName} , {lblTime.Text}";
+                lblTime.Visible = false; // Combined with author label
+
                 picAvatar.Location = new Point(5, 0);
                 picAvatar.Anchor = AnchorStyles.Top | AnchorStyles.Left;
 
-                lblTime.Location = new Point(picAvatar.Right + 8, 0);
-                lblTime.Anchor = AnchorStyles.Top | AnchorStyles.Left;
+                lblAuthor.Location = new Point(picAvatar.Right + 8, 5);
+                lblAuthor.Anchor = AnchorStyles.Top | AnchorStyles.Left;
 
+                cardBubble.Location = new Point(picAvatar.Right + 8, lblAuthor.Bottom + 5);
                 cardBubble.CardColor = Color.FromArgb(243, 244, 246); // Gray 100
                 lblText.ForeColor = Color.FromArgb(31, 41, 55); // Gray 800
-                
-                // Adjust bubble width and position
-                int maxBubbleWidth = (int)(pnlMain.Width * 0.7);
-                lblText.MaximumSize = new Size(maxBubbleWidth - 24, 0);
-                cardBubble.Width = lblText.PreferredWidth + 24;
-                cardBubble.Location = new Point(picAvatar.Right + 8, 15);
                 cardBubble.Anchor = AnchorStyles.Top | AnchorStyles.Left;
 
                 if (lblWorked.Visible)
@@ -95,10 +97,10 @@ namespace EmployeeManagement_Windows.Components
                 }
             }
 
-            // Dynamic Height Calculation
-            cardBubble.Height = lblText.PreferredHeight + 16;
-            int totalHeight = cardBubble.Bottom + (lblWorked.Visible ? 35 : 15);
-            this.Height = totalHeight;
+            // Final Height
+            int bottomMost = cardBubble.Bottom;
+            if (lblWorked.Visible) bottomMost = lblWorked.Bottom;
+            this.Height = bottomMost + 15;
         }
     }
 }
