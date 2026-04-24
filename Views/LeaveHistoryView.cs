@@ -68,9 +68,6 @@ namespace EmployeeManagement_Windows.Views
                 {
                     var item = new LeaveItem(leave);
                     item.OnLeaveUpdated += async () => await LoadLeaveHistoryAsync();
-                    
-                    int targetWidth = flowLeaveHistory.Width > 40 ? flowLeaveHistory.Width - 35 : 700;
-                    item.Width = targetWidth;
                     flowLeaveHistory.Controls.Add(item);
                 }
             }

@@ -27,6 +27,10 @@ namespace EmployeeManagement_Windows.Forms
             {
                 avatar.SetImageFromBase64(SessionManager.PhotoBase64);
             }
+            else
+            {
+                avatar.Image = null; // Clear if no photo in current session
+            }
             ShowKanban();
         }
 
@@ -35,6 +39,10 @@ namespace EmployeeManagement_Windows.Forms
             if (!string.IsNullOrEmpty(SessionManager.PhotoBase64))
             {
                 avatar.SetImageFromBase64(SessionManager.PhotoBase64);
+            }
+            else
+            {
+                avatar.Image = null;
             }
         }
 
@@ -127,6 +135,13 @@ namespace EmployeeManagement_Windows.Forms
         private void btnLogout_Click(object sender, EventArgs e)
         {
             SessionManager.Clear();
+            
+            // Clear cached views to prevent cross-user data leakage
+            _kanbanBoard = null;
+            _profileView = null;
+            _leaveHistoryView = null;
+            _meetingListView = null;
+
             this.Hide();
             using (var login = new LoginForm())
             {

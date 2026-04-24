@@ -28,12 +28,13 @@ namespace EmployeeManagement_Windows.Helpers
         public static class StatusBadgeColors
         {
             public static (Color bg, Color text) Scheduled = (ColorTranslator.FromHtml("#EEEDFE"), ColorTranslator.FromHtml("#534AB7"));
+            public static (Color bg, Color text) Assigned = (ColorTranslator.FromHtml("#E0F2FE"), ColorTranslator.FromHtml("#0369A1")); // Blue
             public static (Color bg, Color text) Concluded = (ColorTranslator.FromHtml("#374151"), ColorTranslator.FromHtml("#D1D5DB"));
             public static (Color bg, Color text) Cancelled = (ColorTranslator.FromHtml("#E24B4A"), Color.White);
             public static (Color bg, Color text) Pending = (ColorTranslator.FromHtml("#FEF3C7"), ColorTranslator.FromHtml("#92400E"));
             public static (Color bg, Color text) Approved = (ColorTranslator.FromHtml("#D1FAE5"), ColorTranslator.FromHtml("#065F46"));
             public static (Color bg, Color text) Rejected = (ColorTranslator.FromHtml("#FEE2E2"), ColorTranslator.FromHtml("#991B1B"));
-            public static (Color bg, Color text) InProgress = (ColorTranslator.FromHtml("#FEF3C7"), ColorTranslator.FromHtml("#D97706")); // Derived from pending/amber spec
+            public static (Color bg, Color text) InProgress = (ColorTranslator.FromHtml("#FEF3C7"), ColorTranslator.FromHtml("#D97706")); // Amber/Yellow
         }
 
         // Backward Compatibility Aliases (Map old Catppuccin aliases to new theme)

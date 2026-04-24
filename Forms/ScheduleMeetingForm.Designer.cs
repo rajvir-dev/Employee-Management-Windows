@@ -20,13 +20,16 @@ namespace EmployeeManagement_Windows.Forms
             this.cardModal = new CardPanel();
             this.lblTitle = new System.Windows.Forms.Label();
             this.lblSubject = new System.Windows.Forms.Label();
-            this.txtSubject = new System.Windows.Forms.TextBox();
+            this.txtSubject = new EmployeeManagement_Windows.Controls.ModernTextBox();
             this.lblDate = new System.Windows.Forms.Label();
             this.dtpDate = new System.Windows.Forms.DateTimePicker();
             this.lblTime = new System.Windows.Forms.Label();
             this.dtpTime = new System.Windows.Forms.DateTimePicker();
             this.btnSchedule = new ModernButton();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.lblDuration = new System.Windows.Forms.Label();
+            this.txtHours = new EmployeeManagement_Windows.Controls.ModernTextBox();
+            this.txtMinutes = new EmployeeManagement_Windows.Controls.ModernTextBox();
             this.cardModal.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -35,6 +38,9 @@ namespace EmployeeManagement_Windows.Forms
             this.cardModal.BackColor = System.Drawing.Color.Transparent;
             this.cardModal.BorderRadius = 20;
             this.cardModal.CardColor = System.Drawing.Color.White;
+            this.cardModal.Controls.Add(this.txtMinutes);
+            this.cardModal.Controls.Add(this.txtHours);
+            this.cardModal.Controls.Add(this.lblDuration);
             this.cardModal.Controls.Add(this.lblTitle);
             this.cardModal.Controls.Add(this.lblSubject);
             this.cardModal.Controls.Add(this.txtSubject);
@@ -44,11 +50,11 @@ namespace EmployeeManagement_Windows.Forms
             this.cardModal.Controls.Add(this.dtpTime);
             this.cardModal.Controls.Add(this.btnSchedule);
             this.cardModal.Controls.Add(this.btnCancel);
-            this.cardModal.Location = new System.Drawing.Point(25, 25);
+            this.cardModal.Location = new System.Drawing.Point(0, 0);
             this.cardModal.Name = "cardModal";
             this.cardModal.Padding = new System.Windows.Forms.Padding(20);
             this.cardModal.ShadowSize = 8;
-            this.cardModal.Size = new System.Drawing.Size(450, 450);
+            this.cardModal.Size = new System.Drawing.Size(450, 500);
             this.cardModal.TabIndex = 0;
             // 
             // lblTitle
@@ -75,13 +81,14 @@ namespace EmployeeManagement_Windows.Forms
             // 
             // txtSubject
             // 
-            this.txtSubject.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(249)))), ((int)(((byte)(250)))));
-            this.txtSubject.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtSubject.Font = new System.Drawing.Font("Segoe UI", 11F);
-            this.txtSubject.Location = new System.Drawing.Point(40, 105);
-            this.txtSubject.Multiline = true;
+            this.txtSubject.BackColor = System.Drawing.Color.Transparent;
+            this.txtSubject.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.txtSubject.LabelText = "";
+            this.txtSubject.Location = new System.Drawing.Point(40, 95);
+            this.txtSubject.Multiline = false;
             this.txtSubject.Name = "txtSubject";
-            this.txtSubject.Size = new System.Drawing.Size(370, 35);
+            this.txtSubject.PlaceholderText = "Enter meeting subject...";
+            this.txtSubject.Size = new System.Drawing.Size(370, 50);
             this.txtSubject.TabIndex = 2;
             // 
             // lblDate
@@ -97,11 +104,10 @@ namespace EmployeeManagement_Windows.Forms
             // 
             // dtpDate
             // 
-            this.dtpDate.CalendarMonthBackground = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(249)))), ((int)(((byte)(250)))));
-            this.dtpDate.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.dtpDate.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.dtpDate.Location = new System.Drawing.Point(40, 185);
             this.dtpDate.Name = "dtpDate";
-            this.dtpDate.Size = new System.Drawing.Size(370, 25);
+            this.dtpDate.Size = new System.Drawing.Size(370, 28);
             this.dtpDate.TabIndex = 4;
             // 
             // lblTime
@@ -117,12 +123,12 @@ namespace EmployeeManagement_Windows.Forms
             // 
             // dtpTime
             // 
-            this.dtpTime.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.dtpTime.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.dtpTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
             this.dtpTime.Location = new System.Drawing.Point(40, 255);
             this.dtpTime.Name = "dtpTime";
             this.dtpTime.ShowUpDown = true;
-            this.dtpTime.Size = new System.Drawing.Size(370, 25);
+            this.dtpTime.Size = new System.Drawing.Size(370, 28);
             this.dtpTime.TabIndex = 6;
             // 
             // btnSchedule
@@ -136,10 +142,10 @@ namespace EmployeeManagement_Windows.Forms
             this.btnSchedule.ForeColor = System.Drawing.Color.White;
             this.btnSchedule.GradientEnd = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(0)))), ((int)(((byte)(224)))));
             this.btnSchedule.GradientStart = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(45)))), ((int)(((byte)(226)))));
-            this.btnSchedule.Location = new System.Drawing.Point(40, 320);
+            this.btnSchedule.Location = new System.Drawing.Point(40, 390);
             this.btnSchedule.Name = "btnSchedule";
             this.btnSchedule.Size = new System.Drawing.Size(370, 50);
-            this.btnSchedule.TabIndex = 7;
+            this.btnSchedule.TabIndex = 9;
             this.btnSchedule.Text = "SCHEDULE";
             this.btnSchedule.UseVisualStyleBackColor = false;
             this.btnSchedule.Click += new System.EventHandler(this.btnSchedule_Click);
@@ -150,24 +156,64 @@ namespace EmployeeManagement_Windows.Forms
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
             this.btnCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(110)))), ((int)(((byte)(114)))));
-            this.btnCancel.Location = new System.Drawing.Point(40, 380);
+            this.btnCancel.Location = new System.Drawing.Point(40, 445);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(370, 35);
-            this.btnCancel.TabIndex = 8;
+            this.btnCancel.TabIndex = 10;
             this.btnCancel.Text = "CANCEL";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // lblDuration
+            // 
+            this.lblDuration.AutoSize = true;
+            this.lblDuration.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.lblDuration.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(110)))), ((int)(((byte)(114)))));
+            this.lblDuration.Location = new System.Drawing.Point(40, 300);
+            this.lblDuration.Name = "lblDuration";
+            this.lblDuration.Size = new System.Drawing.Size(58, 17);
+            this.lblDuration.TabIndex = 7;
+            this.lblDuration.Text = "Duration";
+            // 
+            // txtHours
+            // 
+            this.txtHours.BackColor = System.Drawing.Color.Transparent;
+            this.txtHours.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.txtHours.LabelText = "";
+            this.txtHours.Location = new System.Drawing.Point(40, 320);
+            this.txtHours.Multiline = false;
+            this.txtHours.Name = "txtHours";
+            this.txtHours.NumericOnly = true;
+            this.txtHours.PlaceholderText = "Hours";
+            this.txtHours.Size = new System.Drawing.Size(180, 50);
+            this.txtHours.TabIndex = 7;
+            // 
+            // txtMinutes
+            // 
+            this.txtMinutes.BackColor = System.Drawing.Color.Transparent;
+            this.txtMinutes.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.txtMinutes.LabelText = "";
+            this.txtMinutes.Location = new System.Drawing.Point(230, 320);
+            this.txtMinutes.MaxValue = 59;
+            this.txtMinutes.Multiline = false;
+            this.txtMinutes.Name = "txtMinutes";
+            this.txtMinutes.NumericOnly = true;
+            this.txtMinutes.PlaceholderText = "Minutes";
+            this.txtMinutes.Size = new System.Drawing.Size(180, 50);
+            this.txtMinutes.TabIndex = 8;
             // 
             // ScheduleMeetingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(35)))));
-            this.ClientSize = new System.Drawing.Size(500, 500);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(450, 500);
             this.Controls.Add(this.cardModal);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ScheduleMeetingForm";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.TransparencyKey = System.Drawing.Color.Fuchsia;
             this.Text = "Schedule Meeting";
             this.cardModal.ResumeLayout(false);
             this.cardModal.PerformLayout();
@@ -178,12 +224,15 @@ namespace EmployeeManagement_Windows.Forms
         private CardPanel cardModal;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Label lblSubject;
-        private System.Windows.Forms.TextBox txtSubject;
+        private EmployeeManagement_Windows.Controls.ModernTextBox txtSubject;
         private System.Windows.Forms.Label lblDate;
         private System.Windows.Forms.DateTimePicker dtpDate;
         private System.Windows.Forms.Label lblTime;
         private System.Windows.Forms.DateTimePicker dtpTime;
         private ModernButton btnSchedule;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Label lblDuration;
+        private EmployeeManagement_Windows.Controls.ModernTextBox txtHours;
+        private EmployeeManagement_Windows.Controls.ModernTextBox txtMinutes;
     }
 }

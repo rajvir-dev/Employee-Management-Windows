@@ -21,9 +21,9 @@ namespace EmployeeManagement_Windows.Views
             this.lblStatus = new System.Windows.Forms.Label();
             this.cmbStatus = new System.Windows.Forms.ComboBox();
             this.lblFrom = new System.Windows.Forms.Label();
-            this.dtpFrom = new System.Windows.Forms.DateTimePicker();
+            this.dtpFrom = new EmployeeManagement_Windows.Controls.ModernDatePicker();
             this.lblTo = new System.Windows.Forms.Label();
-            this.dtpTo = new System.Windows.Forms.DateTimePicker();
+            this.dtpTo = new EmployeeManagement_Windows.Controls.ModernDatePicker();
             this.btnSearch = new EmployeeManagement_Windows.Controls.ModernButton();
             this.btnReset = new EmployeeManagement_Windows.Controls.ModernButton();
             this.flowMeetings = new System.Windows.Forms.FlowLayoutPanel();
@@ -69,7 +69,7 @@ namespace EmployeeManagement_Windows.Views
             this.cardFilters.Name = "cardFilters";
             this.cardFilters.Padding = new System.Windows.Forms.Padding(15);
             this.cardFilters.ShadowSize = 2;
-            this.cardFilters.Size = new System.Drawing.Size(1240, 110);
+            this.cardFilters.Size = new System.Drawing.Size(1240, 100);
             this.cardFilters.TabIndex = 1;
             // 
             // lblStatus
@@ -88,14 +88,14 @@ namespace EmployeeManagement_Windows.Views
             this.cmbStatus.FormattingEnabled = true;
             this.cmbStatus.Location = new System.Drawing.Point(25, 45);
             this.cmbStatus.Name = "cmbStatus";
-            this.cmbStatus.Size = new System.Drawing.Size(200, 23);
+            this.cmbStatus.Size = new System.Drawing.Size(220, 23);
             this.cmbStatus.TabIndex = 1;
             // 
             // lblFrom
             // 
             this.lblFrom.AutoSize = true;
             this.lblFrom.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
-            this.lblFrom.Location = new System.Drawing.Point(250, 20);
+            this.lblFrom.Location = new System.Drawing.Point(265, 20);
             this.lblFrom.Name = "lblFrom";
             this.lblFrom.Size = new System.Drawing.Size(63, 15);
             this.lblFrom.TabIndex = 2;
@@ -103,18 +103,17 @@ namespace EmployeeManagement_Windows.Views
             // 
             // dtpFrom
             // 
-            this.dtpFrom.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpFrom.Location = new System.Drawing.Point(250, 45);
+            this.dtpFrom.Location = new System.Drawing.Point(265, 40);
             this.dtpFrom.Name = "dtpFrom";
-            this.dtpFrom.ShowCheckBox = true;
-            this.dtpFrom.Size = new System.Drawing.Size(200, 23);
+            this.dtpFrom.Size = new System.Drawing.Size(220, 40);
             this.dtpFrom.TabIndex = 3;
+            this.dtpFrom.PlaceholderText = "Select date";
             // 
             // lblTo
             // 
             this.lblTo.AutoSize = true;
             this.lblTo.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
-            this.lblTo.Location = new System.Drawing.Point(475, 20);
+            this.lblTo.Location = new System.Drawing.Point(505, 20);
             this.lblTo.Name = "lblTo";
             this.lblTo.Size = new System.Drawing.Size(48, 15);
             this.lblTo.TabIndex = 4;
@@ -122,12 +121,11 @@ namespace EmployeeManagement_Windows.Views
             // 
             // dtpTo
             // 
-            this.dtpTo.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpTo.Location = new System.Drawing.Point(475, 45);
+            this.dtpTo.Location = new System.Drawing.Point(505, 40);
             this.dtpTo.Name = "dtpTo";
-            this.dtpTo.ShowCheckBox = true;
-            this.dtpTo.Size = new System.Drawing.Size(200, 23);
+            this.dtpTo.Size = new System.Drawing.Size(220, 40);
             this.dtpTo.TabIndex = 5;
+            this.dtpTo.PlaceholderText = "Select date";
             // 
             // btnSearch
             // 
@@ -135,9 +133,9 @@ namespace EmployeeManagement_Windows.Views
             this.btnSearch.FlatAppearance.BorderSize = 0;
             this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSearch.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
-            this.btnSearch.Location = new System.Drawing.Point(700, 40);
+            this.btnSearch.Location = new System.Drawing.Point(745, 40);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(100, 35);
+            this.btnSearch.Size = new System.Drawing.Size(100, 40);
             this.btnSearch.TabIndex = 6;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = true;
@@ -149,9 +147,9 @@ namespace EmployeeManagement_Windows.Views
             this.btnReset.FlatAppearance.BorderSize = 0;
             this.btnReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReset.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
-            this.btnReset.Location = new System.Drawing.Point(815, 40);
+            this.btnReset.Location = new System.Drawing.Point(855, 40);
             this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(100, 35);
+            this.btnReset.Size = new System.Drawing.Size(100, 40);
             this.btnReset.TabIndex = 7;
             this.btnReset.Text = "Reset";
             this.btnReset.UseVisualStyleBackColor = true;
@@ -193,9 +191,9 @@ namespace EmployeeManagement_Windows.Views
         private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.ComboBox cmbStatus;
         private System.Windows.Forms.Label lblFrom;
-        private System.Windows.Forms.DateTimePicker dtpFrom;
+        private EmployeeManagement_Windows.Controls.ModernDatePicker dtpFrom;
         private System.Windows.Forms.Label lblTo;
-        private System.Windows.Forms.DateTimePicker dtpTo;
+        private EmployeeManagement_Windows.Controls.ModernDatePicker dtpTo;
         private EmployeeManagement_Windows.Controls.ModernButton btnSearch;
         private EmployeeManagement_Windows.Controls.ModernButton btnReset;
         private System.Windows.Forms.FlowLayoutPanel flowMeetings;

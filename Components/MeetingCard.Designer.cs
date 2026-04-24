@@ -20,9 +20,12 @@ namespace EmployeeManagement_Windows.Components
             this.lblDate = new System.Windows.Forms.Label();
             this.lblTime = new System.Windows.Forms.Label();
             this.badgeStatus = new EmployeeManagement_Windows.Controls.StatusBadge();
-            this.avatar = new EmployeeManagement_Windows.Controls.AvatarCircle();
             this.iconCalendar = new System.Windows.Forms.Label();
             this.iconClock = new System.Windows.Forms.Label();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.flowParticipants = new System.Windows.Forms.FlowLayoutPanel();
             this.cardBase.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -33,8 +36,11 @@ namespace EmployeeManagement_Windows.Components
             this.cardBase.CardColor = System.Drawing.Color.White;
             this.cardBase.Controls.Add(this.iconClock);
             this.cardBase.Controls.Add(this.iconCalendar);
-            this.cardBase.Controls.Add(this.avatar);
+            this.cardBase.Controls.Add(this.flowParticipants);
             this.cardBase.Controls.Add(this.badgeStatus);
+            this.cardBase.Controls.Add(this.btnDelete);
+            this.cardBase.Controls.Add(this.btnCancel);
+            this.cardBase.Controls.Add(this.btnEdit);
             this.cardBase.Controls.Add(this.lblTime);
             this.cardBase.Controls.Add(this.lblDate);
             this.cardBase.Controls.Add(this.lblTitle);
@@ -45,6 +51,15 @@ namespace EmployeeManagement_Windows.Components
             this.cardBase.ShadowSize = 3;
             this.cardBase.Size = new System.Drawing.Size(340, 160);
             this.cardBase.TabIndex = 0;
+            // 
+            // flowParticipants
+            // 
+            this.flowParticipants.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.flowParticipants.Location = new System.Drawing.Point(15, 115);
+            this.flowParticipants.Name = "flowParticipants";
+            this.flowParticipants.Size = new System.Drawing.Size(200, 32);
+            this.flowParticipants.TabIndex = 5;
+            this.flowParticipants.WrapContents = false;
             // 
             // lblTitle
             // 
@@ -112,15 +127,50 @@ namespace EmployeeManagement_Windows.Components
             this.badgeStatus.TabIndex = 3;
             this.badgeStatus.Text = "SCHEDULED";
             // 
-            // avatar
+            // btnEdit
             // 
-            this.avatar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.avatar.BackColor = System.Drawing.Color.Transparent;
-            this.avatar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.avatar.Location = new System.Drawing.Point(15, 120);
-            this.avatar.Name = "avatar";
-            this.avatar.Size = new System.Drawing.Size(24, 24);
-            this.avatar.TabIndex = 5;
+            this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEdit.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnEdit.FlatAppearance.BorderSize = 0;
+            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEdit.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.btnEdit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(95)))), ((int)(((byte)(228)))));
+            this.btnEdit.Location = new System.Drawing.Point(275, 12);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(26, 26);
+            this.btnEdit.TabIndex = 8;
+            this.btnEdit.Text = "📝";
+            this.btnEdit.UseVisualStyleBackColor = false;
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCancel.FlatAppearance.BorderSize = 0;
+            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancel.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.btnCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(75)))), ((int)(((byte)(74)))));
+            this.btnCancel.Location = new System.Drawing.Point(305, 12);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(26, 26);
+            this.btnCancel.TabIndex = 9;
+            this.btnCancel.Text = "ⓧ";
+            this.btnCancel.UseVisualStyleBackColor = false;
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDelete.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnDelete.FlatAppearance.BorderSize = 0;
+            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDelete.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.btnDelete.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(75)))), ((int)(((byte)(74)))));
+            this.btnDelete.Location = new System.Drawing.Point(305, 12);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(26, 26);
+            this.btnDelete.TabIndex = 10;
+            this.btnDelete.Text = "🗑";
+            this.btnDelete.UseVisualStyleBackColor = false;
             // 
             // MeetingCard
             // 
@@ -143,8 +193,11 @@ namespace EmployeeManagement_Windows.Components
         private System.Windows.Forms.Label lblDate;
         private System.Windows.Forms.Label lblTime;
         private EmployeeManagement_Windows.Controls.StatusBadge badgeStatus;
-        private EmployeeManagement_Windows.Controls.AvatarCircle avatar;
+        private System.Windows.Forms.FlowLayoutPanel flowParticipants;
         private System.Windows.Forms.Label iconCalendar;
         private System.Windows.Forms.Label iconClock;
+        private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button btnDelete;
     }
 }

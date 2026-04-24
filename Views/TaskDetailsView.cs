@@ -7,6 +7,7 @@ using EmployeeManagement_Windows.Components;
 using EmployeeManagement_Windows.Helpers;
 using EmployeeManagement_Windows.Models;
 using EmployeeManagement_Windows.Services;
+using EmployeeManagement_Windows.Controls;
 
 namespace EmployeeManagement_Windows.Views
 {
@@ -24,27 +25,104 @@ namespace EmployeeManagement_Windows.Views
 
         private async void LoadData()
         {
-            lblTitle.Text = _task.Title ?? "Untitled Task";
-            lblDescription.Text = _task.Description ?? "No description provided.";
-            
-            // Set initial status
-            UpdateStatusDisplay(_task.StatusId);
+            try
+            {
+                // Fetch full task details including assigned employees
+                var fullTask = await TaskService.GetTaskByIdAsync(_task.EncryptedId);
+                if (fullTask != null)
+                {
+                    _task = fullTask;
+                }
 
-            await LoadComments();
+                lblTitle.Text = _task.Title ?? "Untitled Task";
+                lblDescription.Text = _task.Description ?? "No description provided.";
+                lblDueDateValue.Text = _task.DueDate?.ToString("dd MMM yyyy") ?? "Not set";
+                
+                // Set initial status
+                UpdateStatusDisplay(_task.StatusId);
+
+                // Populate assigned employees
+                flowAssignedTo.Controls.Clear();
+                if (_task.AssignedEmployees != null && _task.AssignedEmployees.Count > 0)
+                {
+                    foreach (var emp in _task.AssignedEmployees)
+                    {
+                        var lblBadge = new Label
+                        {
+                            Text = emp.FullName ?? "Unknown",
+                            AutoSize = true,
+                            BackColor = Color.FromArgb(243, 244, 246),
+                            ForeColor = Color.FromArgb(31, 41, 55),
+                            Font = new Font("Segoe UI", 8.5F, FontStyle.Bold),
+                            Padding = new Padding(10, 4, 10, 4),
+                            Margin = new Padding(0, 0, 8, 4),
+                            TextAlign = ContentAlignment.MiddleCenter
+                        };
+
+                        // Make it slightly rounded
+                        System.Drawing.Drawing2D.GraphicsPath path = new System.Drawing.Drawing2D.GraphicsPath();
+                        int radius = 12;
+                        Rectangle rect = new Rectangle(0, 0, 1000, 1000); // Large enough
+                        // Since AutoSize is true, we'll need to do this in a Paint or Resize event if we want exact rounding,
+                        // but for now, simple FlatStyle with border might be enough, or just leave as is for a clean look.
+                        // Actually, I'll just use a custom control or leave it as a neat rectangle with padding.
+                        
+                        flowAssignedTo.Controls.Add(lblBadge);
+                    }
+                }
+                else if (!string.IsNullOrEmpty(_task.AssignedTo))
+                {
+                    var lblBadge = new Label
+                    {
+                        Text = _task.AssignedTo,
+                        AutoSize = true,
+                        BackColor = Color.FromArgb(243, 244, 246),
+                        ForeColor = Color.FromArgb(31, 41, 55),
+                        Font = new Font("Segoe UI", 8.5F, FontStyle.Bold),
+                        Padding = new Padding(10, 4, 10, 4),
+                        Margin = new Padding(0, 0, 8, 4),
+                        TextAlign = ContentAlignment.MiddleCenter
+                    };
+                    flowAssignedTo.Controls.Add(lblBadge);
+                }
+
+                if (pnlCommentsContainer.Visible)
+                {
+                    await LoadComments();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading task details: " + ex.Message);
+            }
         }
 
         private void UpdateStatusDisplay(int? statusId)
         {
             switch (statusId)
             {
-                case 1: cmbStatus.SelectedIndex = 0; break; // TO DO
-                case 2: cmbStatus.SelectedIndex = 1; break; // IN PROGRESS
-                case 3: cmbStatus.SelectedIndex = 2; break; // COMPLETED
-                default: cmbStatus.SelectedIndex = -1; break;
+                case 1: 
+                    cmbStatus.SelectedIndex = 0;
+                    cmbStatus.BackColor = Color.FromArgb(219, 234, 254); // Blue 100
+                    cmbStatus.ForeColor = Color.FromArgb(37, 99, 235);   // Blue 600
+                    break;
+                case 2: 
+                    cmbStatus.SelectedIndex = 1;
+                    cmbStatus.BackColor = Color.FromArgb(254, 243, 199); // Amber 100
+                    cmbStatus.ForeColor = Color.FromArgb(217, 119, 6);   // Amber 600
+                    break;
+                case 3: 
+                    cmbStatus.SelectedIndex = 2;
+                    cmbStatus.BackColor = Color.FromArgb(209, 250, 229); // Green 100
+                    cmbStatus.ForeColor = Color.FromArgb(5, 150, 105);   // Green 600
+                    break;
+                default: 
+                    cmbStatus.SelectedIndex = -1;
+                    cmbStatus.BackColor = Color.White;
+                    cmbStatus.ForeColor = Color.Black;
+                    break;
             }
             
-            badgeStatus.Text = cmbStatus.SelectedItem?.ToString() ?? "UNKNOWN";
-            badgeStatus.BadgeColor = ThemeColors.GetStatusColor(statusId);
             btnSaveStatus.Visible = false;
         }
 
@@ -54,6 +132,65 @@ namespace EmployeeManagement_Windows.Views
 
             int newStatusId = cmbStatus.SelectedIndex + 1;
             btnSaveStatus.Visible = (newStatusId != _task.StatusId);
+
+            // Update visual immediately for feedback
+            switch (newStatusId)
+            {
+                case 1: 
+                    cmbStatus.BackColor = Color.FromArgb(219, 234, 254);
+                    cmbStatus.ForeColor = Color.FromArgb(37, 99, 235);
+                    break;
+                case 2: 
+                    cmbStatus.BackColor = Color.FromArgb(254, 243, 199);
+                    cmbStatus.ForeColor = Color.FromArgb(217, 119, 6);
+                    break;
+                case 3: 
+                    cmbStatus.BackColor = Color.FromArgb(209, 250, 229);
+                    cmbStatus.ForeColor = Color.FromArgb(5, 150, 105);
+                    break;
+            }
+        }
+
+        private void cmbStatus_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index < 0) return;
+
+            string text = cmbStatus.Items[e.Index].ToString();
+            Color textColor = Color.Black;
+
+            // Individual colors for each option
+            if (text == "Assigned") textColor = ColorTranslator.FromHtml("#2563EB");
+            else if (text == "In Progress") textColor = ColorTranslator.FromHtml("#D97706");
+            else if (text == "Completed") textColor = ColorTranslator.FromHtml("#059669");
+
+            // Draw background
+            if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
+            {
+                e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(243, 244, 246)), e.Bounds); // Light Gray hover
+            }
+            else
+            {
+                e.Graphics.FillRectangle(new SolidBrush(Color.White), e.Bounds);
+            }
+
+            // Draw text
+            using (Font font = new Font("Segoe UI Semibold", 10F))
+            {
+                Rectangle textRect = new Rectangle(e.Bounds.X + 10, e.Bounds.Y, e.Bounds.Width - 10, e.Bounds.Height);
+                TextRenderer.DrawText(e.Graphics, text, font, textRect, textColor, TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
+            }
+        }
+
+        private void btnToggleComments_Click(object sender, EventArgs e)
+        {
+            bool isVisible = !pnlCommentsContainer.Visible;
+            pnlCommentsContainer.Visible = isVisible;
+            pnlInput.Visible = isVisible;
+
+            if (isVisible)
+            {
+                LoadComments();
+            }
         }
 
         private async void btnSaveStatus_Click(object sender, EventArgs e)

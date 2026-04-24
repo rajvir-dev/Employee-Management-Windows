@@ -30,9 +30,9 @@ namespace EmployeeManagement_Windows.Views
         {
             this.BackColor = ThemeColors.Background;
             
-            pnlPending.BackColor = ThemeColors.TextSecondary;
-            pnlInProgress.BackColor = ThemeColors.Warning;
-            pnlCompleted.BackColor = ThemeColors.Success;
+            pnlPending.BackColor = ColorTranslator.FromHtml("#0369A1"); // Assigned (Blue)
+            pnlInProgress.BackColor = ThemeColors.Warning; // In Progress (Amber)
+            pnlCompleted.BackColor = ThemeColors.Success; // Completed (Green)
 
             lblPending.ForeColor = Color.White;
             lblInProgress.ForeColor = Color.White;

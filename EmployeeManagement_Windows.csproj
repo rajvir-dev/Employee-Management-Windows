@@ -12,6 +12,7 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -61,6 +62,9 @@
     <Compile Include="Controls\ModernButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\ModernDatePicker.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Controls\ModernCard.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -74,6 +78,7 @@
     <Compile Include="Core\SessionManager.cs" />
     <Compile Include="Core\SignalRService.cs" />
     <Compile Include="Helpers\ThemeColors.cs" />
+    <Compile Include="Models\AssignToDto.cs" />
     <Compile Include="Models\CommentDto.cs" />
     <Compile Include="Models\EmployeeDto.cs" />
     <Compile Include="Models\LeaveDto.cs" />

@@ -21,5 +21,6 @@ namespace EmployeeManagement_Windows.Models
         public bool IsCompleted { get; set; }
         public string AssignedTo { get; set; } = string.Empty;
         public string ProjectName { get; set; } = string.Empty;
+        public System.Collections.Generic.List<AssignToDto> AssignedEmployees { get; set; } = new System.Collections.Generic.List<AssignToDto>();
     }
 }

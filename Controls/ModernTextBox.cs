@@ -74,6 +74,11 @@ namespace EmployeeManagement_Windows.Controls
             set => _textBox.Text = value;
         }
 
+        public void Clear()
+        {
+            _textBox.Text = string.Empty;
+        }
+
         public string LabelText
         {
             get => _lblLabel.Text;

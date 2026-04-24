@@ -51,3 +51,10 @@
 ### Phase 12: v1.0 Documentation Recovery (✅)
 - Generate `SUMMARY.md` and `VERIFICATION.md` for Phases 0-6.
 - **Gap Closure**: Closes documentation gaps from v1.0 Audit.
+
+### Phase 13: Meeting Lifecycle Management
+- Add Edit, Cancel, and Delete buttons to `MeetingCard`.
+- Implement status-based button visibility logic (MVC reference).
+- Update `TaskService` and `ScheduleMeetingForm` for lifecycle actions.
+- Implement API endpoints for Cancel/Delete/Update in TaskController.
+- **Depends on**: Phase 4, Phase 6

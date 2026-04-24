@@ -33,6 +33,12 @@ namespace EmployeeManagement_Windows.Models
         public DateTime? CreatedDate { get; set; }
         public int LeaveType { get; set; }
 
+        public string FullName { get; set; } = string.Empty;
+        public string EmailId { get; set; } = string.Empty;
+        public string MobileNumber { get; set; } = string.Empty;
+        public string PhotoPath { get; set; } = string.Empty;
+        public string PhotoBase64 { get; set; } = string.Empty;
+
         public string StatusText
         {
             get

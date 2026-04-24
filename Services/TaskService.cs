@@ -63,5 +63,29 @@ namespace EmployeeManagement_Windows.Services
         {
             return await ApiClient.GetAsync<List<CommentDto>>("api/task/meetings");
         }
+
+        /// <summary>
+        /// Cancels a meeting.
+        /// </summary>
+        public static async Task<ApiResponse> CancelMeetingAsync(string encryptedMeetingId)
+        {
+            return await ApiClient.PostAsync($"api/task/meetings/{encryptedMeetingId}", null);
+        }
+
+        /// <summary>
+        /// Deletes a meeting.
+        /// </summary>
+        public static async Task<ApiResponse> DeleteMeetingAsync(string encryptedMeetingId)
+        {
+            return await ApiClient.DeleteAsync($"api/task/meetings/{encryptedMeetingId}");
+        }
+
+        /// <summary>
+        /// Updates an existing meeting.
+        /// </summary>
+        public static async Task<ApiResponse> UpdateMeetingAsync(string encryptedMeetingId, object meetingData)
+        {
+            return await ApiClient.PutAsync($"api/task/meetings/{encryptedMeetingId}", meetingData);
+        }
     }
 }

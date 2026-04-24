@@ -83,7 +83,7 @@ namespace EmployeeManagement_Windows.Views
             this.lblPending.Name = "lblPending";
             this.lblPending.Size = new System.Drawing.Size(406, 40);
             this.lblPending.TabIndex = 0;
-            this.lblPending.Text = "PENDING";
+            this.lblPending.Text = "ASSIGNED";
             this.lblPending.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pnlInProgress

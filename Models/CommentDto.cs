@@ -21,7 +21,10 @@ namespace EmployeeManagement_Windows.Models
         public string MeetingTitle { get; set; } = string.Empty;
         public DateTime? MeetingDateTime { get; set; }
         public string Status { get; set; } = string.Empty;
+        public int StatusId { get; set; }
         public string StatusText { get; set; } = string.Empty;
+        public string PhotoBase64 { get; set; } = string.Empty;
+        public System.Collections.Generic.List<AssignToDto> AssignedEmployees { get; set; } = new System.Collections.Generic.List<AssignToDto>();
     }
 
     /// <summary>

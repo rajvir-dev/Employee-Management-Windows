@@ -18,21 +18,31 @@ namespace EmployeeManagement_Windows.Views
 
         private void InitializeComponent()
         {
-            this.pnlHeader = new CardPanel();
+            this.pnlHeader = new EmployeeManagement_Windows.Controls.CardPanel();
+            this.lblTitleTitle = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
+            this.lblDueDateTitle = new System.Windows.Forms.Label();
+            this.lblDueDateValue = new System.Windows.Forms.Label();
+            this.lblAssignedToTitle = new System.Windows.Forms.Label();
+            this.flowAssignedTo = new System.Windows.Forms.FlowLayoutPanel();
+            this.lblDescriptionTitle = new System.Windows.Forms.Label();
             this.lblDescription = new System.Windows.Forms.Label();
-            this.badgeStatus = new StatusBadge();
+            this.lblStatusTitle = new System.Windows.Forms.Label();
             this.cmbStatus = new System.Windows.Forms.ComboBox();
             this.btnSaveStatus = new EmployeeManagement_Windows.Controls.ModernButton();
+            this.btnBack = new EmployeeManagement_Windows.Controls.ModernButton();
+            this.btnToggleComments = new EmployeeManagement_Windows.Controls.ModernButton();
+            this.pnlCommentsContainer = new System.Windows.Forms.Panel();
             this.pnlComments = new System.Windows.Forms.FlowLayoutPanel();
-            this.pnlInput = new CardPanel();
-            this.txtComment = new System.Windows.Forms.TextBox();
-            this.btnBack = new System.Windows.Forms.Button();
-            this.btnSend = new ModernButton();
-            this.lblActivityTitle = new System.Windows.Forms.Label();
+            this.pnlInput = new EmployeeManagement_Windows.Controls.CardPanel();
+            this.txtComment = new EmployeeManagement_Windows.Controls.ModernTextBox();
+            this.btnSend = new EmployeeManagement_Windows.Controls.ModernButton();
             this.txtHours = new EmployeeManagement_Windows.Controls.ModernTextBox();
             this.txtMinutes = new EmployeeManagement_Windows.Controls.ModernTextBox();
+            this.lblHoursLabel = new System.Windows.Forms.Label();
+            this.lblMinutesLabel = new System.Windows.Forms.Label();
             this.pnlHeader.SuspendLayout();
+            this.pnlCommentsContainer.SuspendLayout();
             this.pnlInput.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -41,245 +51,358 @@ namespace EmployeeManagement_Windows.Views
             this.pnlHeader.BackColor = System.Drawing.Color.Transparent;
             this.pnlHeader.BorderRadius = 15;
             this.pnlHeader.CardColor = System.Drawing.Color.White;
+            this.pnlHeader.Controls.Add(this.btnToggleComments);
+            this.pnlHeader.Controls.Add(this.btnBack);
             this.pnlHeader.Controls.Add(this.btnSaveStatus);
-            this.pnlHeader.Controls.Add(this.badgeStatus);
             this.pnlHeader.Controls.Add(this.cmbStatus);
+            this.pnlHeader.Controls.Add(this.lblStatusTitle);
             this.pnlHeader.Controls.Add(this.lblDescription);
+            this.pnlHeader.Controls.Add(this.lblDescriptionTitle);
+            this.pnlHeader.Controls.Add(this.flowAssignedTo);
+            this.pnlHeader.Controls.Add(this.lblAssignedToTitle);
+            this.pnlHeader.Controls.Add(this.lblDueDateValue);
+            this.pnlHeader.Controls.Add(this.lblDueDateTitle);
             this.pnlHeader.Controls.Add(this.lblTitle);
+            this.pnlHeader.Controls.Add(this.lblTitleTitle);
             this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlHeader.Location = new System.Drawing.Point(20, 20);
             this.pnlHeader.Name = "pnlHeader";
             this.pnlHeader.Padding = new System.Windows.Forms.Padding(20);
-            this.pnlHeader.ShadowSize = 5;
-            this.pnlHeader.Size = new System.Drawing.Size(960, 120);
+            this.pnlHeader.ShadowSize = 4;
+            this.pnlHeader.Size = new System.Drawing.Size(960, 280);
             this.pnlHeader.TabIndex = 0;
+            // 
+            // lblTitleTitle
+            // 
+            this.lblTitleTitle.AutoSize = true;
+            this.lblTitleTitle.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
+            this.lblTitleTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(65)))), ((int)(((byte)(81)))));
+            this.lblTitleTitle.Location = new System.Drawing.Point(25, 25);
+            this.lblTitleTitle.Name = "lblTitleTitle";
+            this.lblTitleTitle.Size = new System.Drawing.Size(35, 17);
+            this.lblTitleTitle.TabIndex = 0;
+            this.lblTitleTitle.Text = "Title";
             // 
             // lblTitle
             // 
             this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold);
-            this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
-            this.lblTitle.Location = new System.Drawing.Point(20, 20);
+            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(114)))), ((int)(((byte)(128)))));
+            this.lblTitle.Location = new System.Drawing.Point(25, 45);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(124, 32);
-            this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "Task Title";
+            this.lblTitle.Size = new System.Drawing.Size(46, 19);
+            this.lblTitle.TabIndex = 1;
+            this.lblTitle.Text = "Task 1";
+            // 
+            // lblDueDateTitle
+            // 
+            this.lblDueDateTitle.AutoSize = true;
+            this.lblDueDateTitle.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
+            this.lblDueDateTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(65)))), ((int)(((byte)(81)))));
+            this.lblDueDateTitle.Location = new System.Drawing.Point(350, 25);
+            this.lblDueDateTitle.Name = "lblDueDateTitle";
+            this.lblDueDateTitle.Size = new System.Drawing.Size(66, 17);
+            this.lblDueDateTitle.TabIndex = 2;
+            this.lblDueDateTitle.Text = "Due Date";
+            // 
+            // lblDueDateValue
+            // 
+            this.lblDueDateValue.AutoSize = true;
+            this.lblDueDateValue.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            this.lblDueDateValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(114)))), ((int)(((byte)(128)))));
+            this.lblDueDateValue.Location = new System.Drawing.Point(350, 45);
+            this.lblDueDateValue.Name = "lblDueDateValue";
+            this.lblDueDateValue.Size = new System.Drawing.Size(89, 19);
+            this.lblDueDateValue.TabIndex = 3;
+            this.lblDueDateValue.Text = "16 Apr 2026";
+            // 
+            // lblAssignedToTitle
+            // 
+            this.lblAssignedToTitle.AutoSize = true;
+            this.lblAssignedToTitle.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
+            this.lblAssignedToTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(65)))), ((int)(((byte)(81)))));
+            this.lblAssignedToTitle.Location = new System.Drawing.Point(620, 25);
+            this.lblAssignedToTitle.Name = "lblAssignedToTitle";
+            this.lblAssignedToTitle.Size = new System.Drawing.Size(83, 17);
+            this.lblAssignedToTitle.TabIndex = 4;
+            this.lblAssignedToTitle.Text = "Assigned To";
+            // 
+            // flowAssignedTo
+            // 
+            this.flowAssignedTo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.flowAssignedTo.Location = new System.Drawing.Point(620, 45);
+            this.flowAssignedTo.Name = "flowAssignedTo";
+            this.flowAssignedTo.Size = new System.Drawing.Size(310, 45);
+            this.flowAssignedTo.TabIndex = 5;
+            // 
+            // lblDescriptionTitle
+            // 
+            this.lblDescriptionTitle.AutoSize = true;
+            this.lblDescriptionTitle.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
+            this.lblDescriptionTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(65)))), ((int)(((byte)(81)))));
+            this.lblDescriptionTitle.Location = new System.Drawing.Point(25, 85);
+            this.lblDescriptionTitle.Name = "lblDescriptionTitle";
+            this.lblDescriptionTitle.Size = new System.Drawing.Size(79, 17);
+            this.lblDescriptionTitle.TabIndex = 6;
+            this.lblDescriptionTitle.Text = "Description";
             // 
             // lblDescription
             // 
-            this.lblDescription.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.lblDescription.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(110)))), ((int)(((byte)(114)))));
-            this.lblDescription.Location = new System.Drawing.Point(22, 60);
+            this.lblDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblDescription.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            this.lblDescription.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(114)))), ((int)(((byte)(128)))));
+            this.lblDescription.Location = new System.Drawing.Point(25, 105);
             this.lblDescription.Name = "lblDescription";
-            this.lblDescription.Size = new System.Drawing.Size(700, 40);
-            this.lblDescription.TabIndex = 1;
-            this.lblDescription.Text = "Detailed description of the task goes here...";
+            this.lblDescription.Size = new System.Drawing.Size(910, 30);
+            this.lblDescription.TabIndex = 7;
+            this.lblDescription.Text = "Task 1 is very important complete it within time";
+            // 
+            // lblStatusTitle
+            // 
+            this.lblStatusTitle.AutoSize = true;
+            this.lblStatusTitle.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
+            this.lblStatusTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(65)))), ((int)(((byte)(81)))));
+            this.lblStatusTitle.Location = new System.Drawing.Point(25, 145);
+            this.lblStatusTitle.Name = "lblStatusTitle";
+            this.lblStatusTitle.Size = new System.Drawing.Size(46, 17);
+            this.lblStatusTitle.TabIndex = 8;
+            this.lblStatusTitle.Text = "Status";
             // 
             // cmbStatus
             // 
-            this.cmbStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(243)))), ((int)(((byte)(199)))));
+            this.cmbStatus.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cmbStatus.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.cmbStatus.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.cmbStatus.FormattingEnabled = true;
+            this.cmbStatus.ItemHeight = 34;
             this.cmbStatus.Items.AddRange(new object[] {
-            "TO DO",
-            "IN PROGRESS",
-            "COMPLETED"});
-            this.cmbStatus.Location = new System.Drawing.Point(680, 25);
+            "Assigned",
+            "In Progress",
+            "Completed"});
+            this.cmbStatus.Location = new System.Drawing.Point(25, 170);
             this.cmbStatus.Name = "cmbStatus";
-            this.cmbStatus.Size = new System.Drawing.Size(120, 23);
-            this.cmbStatus.TabIndex = 2;
+            this.cmbStatus.Size = new System.Drawing.Size(200, 40);
+            this.cmbStatus.TabIndex = 9;
+            this.cmbStatus.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbStatus_DrawItem);
             this.cmbStatus.SelectedIndexChanged += new System.EventHandler(this.cmbStatus_SelectedIndexChanged);
-            // 
-            // badgeStatus
-            // 
-            this.badgeStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.badgeStatus.BadgeColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(65)))), ((int)(((byte)(81)))));
-            this.badgeStatus.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold);
-            this.badgeStatus.ForeColor = System.Drawing.Color.White;
-            this.badgeStatus.Location = new System.Drawing.Point(820, 23);
-            this.badgeStatus.Name = "badgeStatus";
-            this.badgeStatus.Size = new System.Drawing.Size(110, 28);
-            this.badgeStatus.TabIndex = 3;
-            this.badgeStatus.Text = "IN PROGRESS";
             // 
             // btnSaveStatus
             // 
-            this.btnSaveStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSaveStatus.BackColor = System.Drawing.Color.Transparent;
+            this.btnSaveStatus.BackColor = System.Drawing.Color.White;
             this.btnSaveStatus.BorderRadius = 8;
             this.btnSaveStatus.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSaveStatus.FlatAppearance.BorderSize = 0;
+            this.btnSaveStatus.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(95)))), ((int)(((byte)(228)))));
             this.btnSaveStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSaveStatus.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold);
-            this.btnSaveStatus.ForeColor = System.Drawing.Color.White;
-            this.btnSaveStatus.GradientEnd = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(95)))), ((int)(((byte)(228)))));
-            this.btnSaveStatus.GradientStart = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(95)))), ((int)(((byte)(228)))));
-            this.btnSaveStatus.Location = new System.Drawing.Point(600, 23);
+            this.btnSaveStatus.Font = new System.Drawing.Font("Segoe UI Semibold", 9.5F);
+            this.btnSaveStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(95)))), ((int)(((byte)(228)))));
+            this.btnSaveStatus.Location = new System.Drawing.Point(25, 225);
             this.btnSaveStatus.Name = "btnSaveStatus";
-            this.btnSaveStatus.Size = new System.Drawing.Size(70, 28);
-            this.btnSaveStatus.TabIndex = 4;
-            this.btnSaveStatus.Text = "SAVE";
+            this.btnSaveStatus.Size = new System.Drawing.Size(100, 35);
+            this.btnSaveStatus.Style = EmployeeManagement_Windows.Controls.ButtonStyle.Outline;
+            this.btnSaveStatus.TabIndex = 10;
+            this.btnSaveStatus.Text = "Save Status";
             this.btnSaveStatus.Visible = false;
             this.btnSaveStatus.Click += new System.EventHandler(this.btnSaveStatus_Click);
             // 
+            // btnBack
+            // 
+            this.btnBack.BackColor = System.Drawing.Color.White;
+            this.btnBack.BorderRadius = 8;
+            this.btnBack.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnBack.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(209)))), ((int)(((byte)(213)))), ((int)(((byte)(219)))));
+            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBack.Font = new System.Drawing.Font("Segoe UI Semibold", 9.5F);
+            this.btnBack.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(65)))), ((int)(((byte)(81)))));
+            this.btnBack.Location = new System.Drawing.Point(135, 225);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(60, 35);
+            this.btnBack.Style = EmployeeManagement_Windows.Controls.ButtonStyle.Outline;
+            this.btnBack.TabIndex = 11;
+            this.btnBack.Text = "Back";
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            // 
+            // btnToggleComments
+            // 
+            this.btnToggleComments.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(65)))), ((int)(((byte)(81)))));
+            this.btnToggleComments.BorderRadius = 8;
+            this.btnToggleComments.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnToggleComments.FlatAppearance.BorderSize = 0;
+            this.btnToggleComments.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnToggleComments.Font = new System.Drawing.Font("Segoe UI Semibold", 9.5F);
+            this.btnToggleComments.ForeColor = System.Drawing.Color.White;
+            this.btnToggleComments.Location = new System.Drawing.Point(205, 225);
+            this.btnToggleComments.Name = "btnToggleComments";
+            this.btnToggleComments.Size = new System.Drawing.Size(100, 35);
+            this.btnToggleComments.TabIndex = 12;
+            this.btnToggleComments.Text = "Comments";
+            this.btnToggleComments.Click += new System.EventHandler(this.btnToggleComments_Click);
+            // 
+            // pnlCommentsContainer
+            // 
+            this.pnlCommentsContainer.AutoScroll = true;
+            this.pnlCommentsContainer.Controls.Add(this.pnlComments);
+            this.pnlCommentsContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlCommentsContainer.Location = new System.Drawing.Point(20, 320);
+            this.pnlCommentsContainer.Name = "pnlCommentsContainer";
+            this.pnlCommentsContainer.Padding = new System.Windows.Forms.Padding(0, 0, 0, 20);
+            this.pnlCommentsContainer.Size = new System.Drawing.Size(960, 340);
+            this.pnlCommentsContainer.TabIndex = 1;
+            this.pnlCommentsContainer.Visible = false;
+            // 
             // pnlComments
             // 
-            this.pnlComments.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlComments.AutoScroll = true;
-            this.pnlComments.BackColor = System.Drawing.Color.Transparent;
-            this.pnlComments.Location = new System.Drawing.Point(20, 180);
+            this.pnlComments.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlComments.Location = new System.Drawing.Point(0, 0);
             this.pnlComments.Name = "pnlComments";
             this.pnlComments.Padding = new System.Windows.Forms.Padding(0, 0, 10, 0);
-            this.pnlComments.Size = new System.Drawing.Size(960, 380);
-            this.pnlComments.TabIndex = 1;
+            this.pnlComments.Size = new System.Drawing.Size(960, 1000); // High initial height for scroll
+            this.pnlComments.TabIndex = 0;
+            this.pnlComments.AutoSize = true;
+            this.pnlComments.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             // 
             // pnlInput
             // 
             this.pnlInput.BackColor = System.Drawing.Color.Transparent;
             this.pnlInput.BorderRadius = 15;
             this.pnlInput.CardColor = System.Drawing.Color.White;
+            this.pnlInput.Controls.Add(this.lblMinutesLabel);
+            this.pnlInput.Controls.Add(this.lblHoursLabel);
             this.pnlInput.Controls.Add(this.txtMinutes);
             this.pnlInput.Controls.Add(this.txtHours);
             this.pnlInput.Controls.Add(this.btnSend);
             this.pnlInput.Controls.Add(this.txtComment);
             this.pnlInput.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlInput.Location = new System.Drawing.Point(20, 560);
+            this.pnlInput.Location = new System.Drawing.Point(20, 500);
             this.pnlInput.Name = "pnlInput";
-            this.pnlInput.Padding = new System.Windows.Forms.Padding(10);
-            this.pnlInput.ShadowSize = 5;
-            this.pnlInput.Size = new System.Drawing.Size(960, 100);
-            this.pnlInput.TabIndex = 2;
-            // 
-            // txtHours
-            // 
-            this.txtHours.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtHours.BackColor = System.Drawing.Color.White;
-            this.txtHours.LabelText = "";
-            this.txtHours.Location = new System.Drawing.Point(20, 60);
-            this.txtHours.MaxValue = 24;
-            this.txtHours.Multiline = false;
-            this.txtHours.Name = "txtHours";
-            this.txtHours.NumericOnly = true;
-            this.txtHours.PasswordChar = false;
-            this.txtHours.PasswordCharValue = '\0';
-            this.txtHours.PlaceholderText = "Hours";
-            this.txtHours.Size = new System.Drawing.Size(120, 30);
-            this.txtHours.TabIndex = 2;
-            // 
-            // txtMinutes
-            // 
-            this.txtMinutes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtMinutes.BackColor = System.Drawing.Color.White;
-            this.txtMinutes.LabelText = "";
-            this.txtMinutes.Location = new System.Drawing.Point(150, 60);
-            this.txtMinutes.MaxValue = 60;
-            this.txtMinutes.Multiline = false;
-            this.txtMinutes.Name = "txtMinutes";
-            this.txtMinutes.NumericOnly = true;
-            this.txtMinutes.PasswordChar = false;
-            this.txtMinutes.PasswordCharValue = '\0';
-            this.txtMinutes.PlaceholderText = "Minutes";
-            this.txtMinutes.Size = new System.Drawing.Size(120, 30);
-            this.txtMinutes.TabIndex = 3;
+            this.pnlInput.Visible = false;
+            this.pnlInput.Padding = new System.Windows.Forms.Padding(15);
+            this.pnlInput.ShadowSize = 3;
+            this.pnlInput.Size = new System.Drawing.Size(960, 160);
+            this.pnlInput.TabIndex = 1;
             // 
             // txtComment
             // 
             this.txtComment.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtComment.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(249)))), ((int)(((byte)(250)))));
-            this.txtComment.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtComment.Font = new System.Drawing.Font("Segoe UI", 11F);
-            this.txtComment.Location = new System.Drawing.Point(20, 20);
+            this.txtComment.BackColor = System.Drawing.Color.Transparent;
+            this.txtComment.LabelText = "";
+            this.txtComment.Location = new System.Drawing.Point(15, 15);
             this.txtComment.Multiline = true;
             this.txtComment.Name = "txtComment";
-            this.txtComment.Size = new System.Drawing.Size(780, 40);
+            this.txtComment.PlaceholderText = "Type a New Message";
+            this.txtComment.Size = new System.Drawing.Size(860, 50);
             this.txtComment.TabIndex = 0;
-            // 
-            // btnBack
-            // 
-            this.btnBack.FlatAppearance.BorderSize = 0;
-            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBack.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.btnBack.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(45)))), ((int)(((byte)(226)))));
-            this.btnBack.Location = new System.Drawing.Point(5, 5);
-            this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(30, 30);
-            this.btnBack.TabIndex = 4;
-            this.btnBack.Text = "←";
-            this.btnBack.UseVisualStyleBackColor = true;
-            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // btnSend
             // 
             this.btnSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSend.BackColor = System.Drawing.Color.Transparent;
-            this.btnSend.BorderRadius = 12;
+            this.btnSend.BorderRadius = 20;
             this.btnSend.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSend.FlatAppearance.BorderSize = 0;
             this.btnSend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSend.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnSend.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.btnSend.ForeColor = System.Drawing.Color.White;
-            this.btnSend.GradientEnd = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(0)))), ((int)(((byte)(224)))));
-            this.btnSend.GradientStart = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(45)))), ((int)(((byte)(226)))));
-            this.btnSend.Location = new System.Drawing.Point(820, 15);
+            this.btnSend.GradientEnd = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(95)))), ((int)(((byte)(228)))));
+            this.btnSend.GradientStart = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(95)))), ((int)(((byte)(228)))));
+            this.btnSend.Location = new System.Drawing.Point(890, 20);
             this.btnSend.Name = "btnSend";
-            this.btnSend.Size = new System.Drawing.Size(120, 50);
+            this.btnSend.Size = new System.Drawing.Size(40, 40);
             this.btnSend.TabIndex = 1;
-            this.btnSend.Text = "SEND";
+            this.btnSend.Text = "➤";
             this.btnSend.UseVisualStyleBackColor = false;
             this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
             // 
-            // lblActivityTitle
+            // txtHours
             // 
-            this.lblActivityTitle.AutoSize = true;
-            this.lblActivityTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.lblActivityTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
-            this.lblActivityTitle.Location = new System.Drawing.Point(25, 155);
-            this.lblActivityTitle.Name = "lblActivityTitle";
-            this.lblActivityTitle.Size = new System.Drawing.Size(71, 21);
-            this.lblActivityTitle.TabIndex = 3;
-            this.lblActivityTitle.Text = "Activity";
+            this.txtHours.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtHours.BackColor = System.Drawing.Color.White;
+            this.txtHours.Location = new System.Drawing.Point(15, 80);
+            this.txtHours.Name = "txtHours";
+            this.txtHours.Size = new System.Drawing.Size(120, 25);
+            this.txtHours.TabIndex = 2;
+            // 
+            // txtMinutes
+            // 
+            this.txtMinutes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtMinutes.BackColor = System.Drawing.Color.White;
+            this.txtMinutes.Location = new System.Drawing.Point(160, 80);
+            this.txtMinutes.Name = "txtMinutes";
+            this.txtMinutes.Size = new System.Drawing.Size(120, 25);
+            this.txtMinutes.TabIndex = 3;
+            // 
+            // lblHoursLabel
+            // 
+            this.lblHoursLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblHoursLabel.AutoSize = true;
+            this.lblHoursLabel.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.lblHoursLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(114)))), ((int)(((byte)(128)))));
+            this.lblHoursLabel.Location = new System.Drawing.Point(15, 65);
+            this.lblHoursLabel.Name = "lblHoursLabel";
+            this.lblHoursLabel.Size = new System.Drawing.Size(38, 13);
+            this.lblHoursLabel.TabIndex = 4;
+            this.lblHoursLabel.Text = "Hours";
+            // 
+            // lblMinutesLabel
+            // 
+            this.lblMinutesLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblMinutesLabel.AutoSize = true;
+            this.lblMinutesLabel.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.lblMinutesLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(114)))), ((int)(((byte)(128)))));
+            this.lblMinutesLabel.Location = new System.Drawing.Point(160, 65);
+            this.lblMinutesLabel.Name = "lblMinutesLabel";
+            this.lblMinutesLabel.Size = new System.Drawing.Size(49, 13);
+            this.lblMinutesLabel.TabIndex = 5;
+            this.lblMinutesLabel.Text = "Minutes";
             // 
             // TaskDetailsView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = false;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(249)))), ((int)(((byte)(250)))));
-            this.Controls.Add(this.btnBack);
-            this.Controls.Add(this.lblActivityTitle);
-            this.Controls.Add(this.pnlInput);
-            this.Controls.Add(this.pnlComments);
             this.Controls.Add(this.pnlHeader);
+            this.Controls.Add(this.pnlInput);
+            this.Controls.Add(this.pnlCommentsContainer);
             this.Name = "TaskDetailsView";
-            this.Padding = new Padding(20);
+            this.Padding = new System.Windows.Forms.Padding(20);
             this.Size = new System.Drawing.Size(1000, 680);
             this.pnlHeader.ResumeLayout(false);
             this.pnlHeader.PerformLayout();
+            this.pnlCommentsContainer.ResumeLayout(false);
             this.pnlInput.ResumeLayout(false);
             this.pnlInput.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
-        private CardPanel pnlHeader;
+        private EmployeeManagement_Windows.Controls.CardPanel pnlHeader;
+        private System.Windows.Forms.Label lblTitleTitle;
         private System.Windows.Forms.Label lblTitle;
+        private System.Windows.Forms.Label lblDueDateTitle;
+        private System.Windows.Forms.Label lblDueDateValue;
+        private System.Windows.Forms.Label lblAssignedToTitle;
+        private System.Windows.Forms.FlowLayoutPanel flowAssignedTo;
+        private System.Windows.Forms.Label lblDescriptionTitle;
         private System.Windows.Forms.Label lblDescription;
+        private System.Windows.Forms.Label lblStatusTitle;
         private System.Windows.Forms.ComboBox cmbStatus;
-        private StatusBadge badgeStatus;
-        private ModernButton btnSaveStatus;
+        private EmployeeManagement_Windows.Controls.ModernButton btnSaveStatus;
+        private EmployeeManagement_Windows.Controls.ModernButton btnBack;
+        private EmployeeManagement_Windows.Controls.ModernButton btnToggleComments;
+        private System.Windows.Forms.Panel pnlCommentsContainer;
         private System.Windows.Forms.FlowLayoutPanel pnlComments;
-        private CardPanel pnlInput;
-        private System.Windows.Forms.TextBox txtComment;
-        private ModernButton btnSend;
-        private System.Windows.Forms.Label lblActivityTitle;
-        private System.Windows.Forms.Button btnBack;
+        private EmployeeManagement_Windows.Controls.CardPanel pnlInput;
+        private EmployeeManagement_Windows.Controls.ModernTextBox txtComment;
+        private EmployeeManagement_Windows.Controls.ModernButton btnSend;
         private EmployeeManagement_Windows.Controls.ModernTextBox txtHours;
         private EmployeeManagement_Windows.Controls.ModernTextBox txtMinutes;
+        private System.Windows.Forms.Label lblHoursLabel;
+        private System.Windows.Forms.Label lblMinutesLabel;
     }
 }
