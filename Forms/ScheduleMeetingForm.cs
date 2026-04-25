@@ -57,7 +57,7 @@ namespace EmployeeManagement_Windows.Forms
                 return;
             }
 
-            DateTime scheduledTime = dtpDate.Value.Date + dtpTime.Value.TimeOfDay;
+            DateTime scheduledTime = (dtpDate.Value ?? DateTime.Today).Date + dtpTime.Value.TimeOfDay;
             if (!_isEditMode && scheduledTime < DateTime.Now)
             {
                 MessageBox.Show("Meeting cannot be scheduled in the past.");

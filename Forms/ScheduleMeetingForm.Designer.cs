@@ -22,7 +22,7 @@ namespace EmployeeManagement_Windows.Forms
             this.lblSubject = new System.Windows.Forms.Label();
             this.txtSubject = new EmployeeManagement_Windows.Controls.ModernTextBox();
             this.lblDate = new System.Windows.Forms.Label();
-            this.dtpDate = new System.Windows.Forms.DateTimePicker();
+            this.dtpDate = new EmployeeManagement_Windows.Controls.ModernDatePicker();
             this.lblTime = new System.Windows.Forms.Label();
             this.dtpTime = new System.Windows.Forms.DateTimePicker();
             this.btnSchedule = new ModernButton();
@@ -104,11 +104,11 @@ namespace EmployeeManagement_Windows.Forms
             // 
             // dtpDate
             // 
-            this.dtpDate.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.dtpDate.Location = new System.Drawing.Point(40, 185);
             this.dtpDate.Name = "dtpDate";
-            this.dtpDate.Size = new System.Drawing.Size(370, 28);
+            this.dtpDate.Size = new System.Drawing.Size(370, 40);
             this.dtpDate.TabIndex = 4;
+            this.dtpDate.Value = System.DateTime.Today;
             // 
             // lblTime
             // 
@@ -212,7 +212,7 @@ namespace EmployeeManagement_Windows.Forms
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ScheduleMeetingForm";
             this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.TransparencyKey = System.Drawing.Color.Fuchsia;
             this.Text = "Schedule Meeting";
             this.cardModal.ResumeLayout(false);
@@ -226,7 +226,7 @@ namespace EmployeeManagement_Windows.Forms
         private System.Windows.Forms.Label lblSubject;
         private EmployeeManagement_Windows.Controls.ModernTextBox txtSubject;
         private System.Windows.Forms.Label lblDate;
-        private System.Windows.Forms.DateTimePicker dtpDate;
+        private EmployeeManagement_Windows.Controls.ModernDatePicker dtpDate;
         private System.Windows.Forms.Label lblTime;
         private System.Windows.Forms.DateTimePicker dtpTime;
         private ModernButton btnSchedule;

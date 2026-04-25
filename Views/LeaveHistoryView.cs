@@ -21,8 +21,15 @@ namespace EmployeeManagement_Windows.Views
 
         private void SetupStyles()
         {
-            this.BackColor = ThemeColors.Background;
-            lblHeader.ForeColor = ThemeColors.TextPrimary;
+            try
+            {
+                this.BackColor = ThemeColors.Background;
+                lblHeader.ForeColor = ThemeColors.TextPrimary;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("SetupStyles error: " + ex.Message);
+            }
         }
 
         protected override async void OnLoad(EventArgs e)
@@ -79,12 +86,19 @@ namespace EmployeeManagement_Windows.Views
 
         private async void btnRequestLeave_Click(object sender, EventArgs e)
         {
-            using (var form = new EmployeeManagement_Windows.Forms.LeaveRequestForm())
+            try
             {
-                if (form.ShowDialog() == DialogResult.OK)
+                using (var form = new EmployeeManagement_Windows.Forms.LeaveRequestForm())
                 {
-                    await LoadLeaveHistoryAsync();
+                    if (form.ShowDialog() == DialogResult.OK)
+                    {
+                        await LoadLeaveHistoryAsync();
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error requesting leave: " + ex.Message);
             }
         }
     }

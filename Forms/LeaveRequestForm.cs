@@ -68,8 +68,8 @@ namespace EmployeeManagement_Windows.Forms
             {
                 LeaveId = _isEditMode ? _existingLeave.LeaveId : (long?)null,
                 Description = txtReason.Text.Trim(),
-                LeaveDate = dtpStart.Value,
-                LeaveEndDate = dtpEnd.Value,
+                LeaveDate = dtpStart.Value ?? DateTime.Today,
+                LeaveEndDate = dtpEnd.Value ?? DateTime.Today,
                 LeaveType = cmbLeaveType.SelectedIndex >= 0 ? cmbLeaveType.SelectedIndex : 2
             };
 

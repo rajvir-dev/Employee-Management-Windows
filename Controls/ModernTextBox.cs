@@ -109,6 +109,17 @@ namespace EmployeeManagement_Windows.Controls
             set => _textBox.UseSystemPasswordChar = value;
         }
 
+        public bool ReadOnly
+        {
+            get => _textBox.ReadOnly;
+            set 
+            { 
+                _textBox.ReadOnly = value;
+                _textBox.BackColor = value ? Color.FromArgb(249, 250, 251) : Color.White;
+                this.Invalidate();
+            }
+        }
+
         public char PasswordCharValue
         {
             get => _textBox.PasswordChar;

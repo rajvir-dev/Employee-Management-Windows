@@ -15,6 +15,7 @@ namespace EmployeeManagement_Windows.Views
     {
         private TaskDto _task;
         public event Action OnBack;
+        public event Action OnStatusChanged;
 
         public TaskDetailsView(TaskDto task)
         {
@@ -99,97 +100,125 @@ namespace EmployeeManagement_Windows.Views
 
         private void UpdateStatusDisplay(int? statusId)
         {
-            switch (statusId)
+            try
             {
-                case 1: 
-                    cmbStatus.SelectedIndex = 0;
-                    cmbStatus.BackColor = Color.FromArgb(219, 234, 254); // Blue 100
-                    cmbStatus.ForeColor = Color.FromArgb(37, 99, 235);   // Blue 600
-                    break;
-                case 2: 
-                    cmbStatus.SelectedIndex = 1;
-                    cmbStatus.BackColor = Color.FromArgb(254, 243, 199); // Amber 100
-                    cmbStatus.ForeColor = Color.FromArgb(217, 119, 6);   // Amber 600
-                    break;
-                case 3: 
-                    cmbStatus.SelectedIndex = 2;
-                    cmbStatus.BackColor = Color.FromArgb(209, 250, 229); // Green 100
-                    cmbStatus.ForeColor = Color.FromArgb(5, 150, 105);   // Green 600
-                    break;
-                default: 
-                    cmbStatus.SelectedIndex = -1;
-                    cmbStatus.BackColor = Color.White;
-                    cmbStatus.ForeColor = Color.Black;
-                    break;
+                switch (statusId)
+                {
+                    case 1: 
+                        cmbStatus.SelectedIndex = 0;
+                        cmbStatus.BackColor = Color.FromArgb(219, 234, 254); // Blue 100
+                        cmbStatus.ForeColor = Color.FromArgb(37, 99, 235);   // Blue 600
+                        break;
+                    case 2: 
+                        cmbStatus.SelectedIndex = 1;
+                        cmbStatus.BackColor = Color.FromArgb(254, 243, 199); // Amber 100
+                        cmbStatus.ForeColor = Color.FromArgb(217, 119, 6);   // Amber 600
+                        break;
+                    case 3: 
+                        cmbStatus.SelectedIndex = 2;
+                        cmbStatus.BackColor = Color.FromArgb(209, 250, 229); // Green 100
+                        cmbStatus.ForeColor = Color.FromArgb(5, 150, 105);   // Green 600
+                        break;
+                    default: 
+                        cmbStatus.SelectedIndex = -1;
+                        cmbStatus.BackColor = Color.White;
+                        cmbStatus.ForeColor = Color.Black;
+                        break;
+                }
+                
+                btnSaveStatus.Visible = false;
             }
-            
-            btnSaveStatus.Visible = false;
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("UpdateStatusDisplay error: " + ex.Message);
+            }
         }
 
         private void cmbStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbStatus.SelectedIndex < 0) return;
-
-            int newStatusId = cmbStatus.SelectedIndex + 1;
-            btnSaveStatus.Visible = (newStatusId != _task.StatusId);
-
-            // Update visual immediately for feedback
-            switch (newStatusId)
+            try
             {
-                case 1: 
-                    cmbStatus.BackColor = Color.FromArgb(219, 234, 254);
-                    cmbStatus.ForeColor = Color.FromArgb(37, 99, 235);
-                    break;
-                case 2: 
-                    cmbStatus.BackColor = Color.FromArgb(254, 243, 199);
-                    cmbStatus.ForeColor = Color.FromArgb(217, 119, 6);
-                    break;
-                case 3: 
-                    cmbStatus.BackColor = Color.FromArgb(209, 250, 229);
-                    cmbStatus.ForeColor = Color.FromArgb(5, 150, 105);
-                    break;
+                if (cmbStatus.SelectedIndex < 0) return;
+
+                int newStatusId = cmbStatus.SelectedIndex + 1;
+                btnSaveStatus.Visible = (newStatusId != _task.StatusId);
+
+                // Update visual immediately for feedback
+                switch (newStatusId)
+                {
+                    case 1: 
+                        cmbStatus.BackColor = Color.FromArgb(219, 234, 254);
+                        cmbStatus.ForeColor = Color.FromArgb(37, 99, 235);
+                        break;
+                    case 2: 
+                        cmbStatus.BackColor = Color.FromArgb(254, 243, 199);
+                        cmbStatus.ForeColor = Color.FromArgb(217, 119, 6);
+                        break;
+                    case 3: 
+                        cmbStatus.BackColor = Color.FromArgb(209, 250, 229);
+                        cmbStatus.ForeColor = Color.FromArgb(5, 150, 105);
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("cmbStatus_SelectedIndexChanged error: " + ex.Message);
             }
         }
 
         private void cmbStatus_DrawItem(object sender, DrawItemEventArgs e)
         {
-            if (e.Index < 0) return;
-
-            string text = cmbStatus.Items[e.Index].ToString();
-            Color textColor = Color.Black;
-
-            // Individual colors for each option
-            if (text == "Assigned") textColor = ColorTranslator.FromHtml("#2563EB");
-            else if (text == "In Progress") textColor = ColorTranslator.FromHtml("#D97706");
-            else if (text == "Completed") textColor = ColorTranslator.FromHtml("#059669");
-
-            // Draw background
-            if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
+            try
             {
-                e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(243, 244, 246)), e.Bounds); // Light Gray hover
+                if (e.Index < 0) return;
+
+                string text = cmbStatus.Items[e.Index].ToString();
+                Color textColor = Color.Black;
+
+                // Individual colors for each option
+                if (text == "Assigned") textColor = ColorTranslator.FromHtml("#2563EB");
+                else if (text == "In Progress") textColor = ColorTranslator.FromHtml("#D97706");
+                else if (text == "Completed") textColor = ColorTranslator.FromHtml("#059669");
+
+                // Draw background
+                if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
+                {
+                    e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(243, 244, 246)), e.Bounds); // Light Gray hover
+                }
+                else
+                {
+                    e.Graphics.FillRectangle(new SolidBrush(Color.White), e.Bounds);
+                }
+
+                // Draw text
+                using (Font font = new Font("Segoe UI Semibold", 10F))
+                {
+                    Rectangle textRect = new Rectangle(e.Bounds.X + 10, e.Bounds.Y, e.Bounds.Width - 10, e.Bounds.Height);
+                    TextRenderer.DrawText(e.Graphics, text, font, textRect, textColor, TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                e.Graphics.FillRectangle(new SolidBrush(Color.White), e.Bounds);
-            }
-
-            // Draw text
-            using (Font font = new Font("Segoe UI Semibold", 10F))
-            {
-                Rectangle textRect = new Rectangle(e.Bounds.X + 10, e.Bounds.Y, e.Bounds.Width - 10, e.Bounds.Height);
-                TextRenderer.DrawText(e.Graphics, text, font, textRect, textColor, TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
+                System.Diagnostics.Debug.WriteLine("cmbStatus_DrawItem error: " + ex.Message);
             }
         }
 
         private void btnToggleComments_Click(object sender, EventArgs e)
         {
-            bool isVisible = !pnlComments.Visible;
-            pnlComments.Visible = isVisible;
-            pnlInput.Visible = isVisible;
-
-            if (isVisible)
+            try
             {
-                LoadComments();
+                bool isVisible = !pnlComments.Visible;
+                pnlComments.Visible = isVisible;
+                pnlInput.Visible = isVisible;
+
+                if (isVisible)
+                {
+                    _ = LoadComments();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error toggling comments: " + ex.Message);
             }
         }
 
@@ -207,6 +236,7 @@ namespace EmployeeManagement_Windows.Views
                 {
                     _task.StatusId = newStatusId;
                     UpdateStatusDisplay(newStatusId);
+                    OnStatusChanged?.Invoke();
                 }
                 else
                 {
@@ -286,7 +316,36 @@ namespace EmployeeManagement_Windows.Views
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            OnBack?.Invoke();
+            try
+            {
+                OnBack?.Invoke();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("btnBack_Click error: " + ex.Message);
+            }
+        }
+
+        private void btnNewMeeting_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (var form = new Forms.ScheduleMeetingForm(_task.EncryptedId))
+                {
+                    if (form.ShowDialog() == DialogResult.OK)
+                    {
+                        // Refresh comments if we're in meeting mode or just to show the new meeting entry
+                        if (pnlComments.Visible)
+                        {
+                            _ = LoadComments();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error opening meeting scheduler: " + ex.Message);
+            }
         }
 
         private void txtMinutes_Load(object sender, EventArgs e)

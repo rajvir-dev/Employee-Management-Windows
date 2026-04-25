@@ -13,6 +13,13 @@ namespace EmployeeManagement_Windows.Controls
             get => _image;
             set { _image = value; this.Invalidate(); }
         }
+        
+        private string _initials = "U";
+        public string Initials
+        {
+            get => _initials;
+            set { _initials = value; this.Invalidate(); }
+        }
 
         public AvatarCircle()
         {
@@ -74,7 +81,7 @@ namespace EmployeeManagement_Windows.Controls
                     using (SolidBrush brush = new SolidBrush(ThemeColors.Primary))
                         g.FillPath(brush, path);
 
-                    TextRenderer.DrawText(g, "U", new Font("Segoe UI", 12F, FontStyle.Bold),
+                    TextRenderer.DrawText(g, _initials, new Font("Segoe UI", 12F, FontStyle.Bold),
                         rect, Color.White,
                         TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
                 }

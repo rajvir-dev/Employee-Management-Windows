@@ -22,44 +22,53 @@ namespace EmployeeManagement_Windows.Views
 
         protected override async void OnLoad(EventArgs e)
         {
-            base.OnLoad(e);
-            await LoadTasks();
+            try
+            {
+                base.OnLoad(e);
+                await LoadTasks();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error on load: " + ex.Message);
+            }
         }
 
         private void SetupStyles()
         {
-            this.BackColor = ThemeColors.Background;
-            
-            pnlPending.BackColor = ColorTranslator.FromHtml("#0369A1"); // Assigned (Blue)
-            pnlInProgress.BackColor = ThemeColors.Warning; // In Progress (Amber)
-            pnlCompleted.BackColor = ThemeColors.Success; // Completed (Green)
-
-            lblPending.ForeColor = Color.White;
-            lblInProgress.ForeColor = Color.White;
-            lblCompleted.ForeColor = Color.White;
-
-            btnRefresh.BackColor = ThemeColors.Primary;
-            btnRefresh.ForeColor = Color.White;
+            try
+            {
+                this.BackColor = ThemeColors.Background;            
+                pnlPending.BackColor = ColorTranslator.FromHtml("#0369A1"); // Assigned (Blue)
+                pnlInProgress.BackColor = ThemeColors.Warning; // In Progress (Amber)
+                pnlCompleted.BackColor = ThemeColors.Success; // Completed (Green)
+                lblPending.ForeColor = Color.White;
+                lblInProgress.ForeColor = Color.White;
+                lblCompleted.ForeColor = Color.White;
+                btnRefresh.BackColor = ThemeColors.Primary;
+                btnRefresh.ForeColor = Color.White;
+            }
+            catch (Exception ex)
+            {
+                // UI styling errors are usually not critical, but good to know
+                System.Diagnostics.Debug.WriteLine("SetupStyles error: " + ex.Message);
+            }
         }
 
-        private async Task LoadTasks()
+        public async Task LoadTasks()
         {
             try
             {
                 var tasks = await TaskService.GetMyTasksAsync();
-                if (this.IsDisposed) return;
-                
+                if (this.IsDisposed) return;                
                 flowPending.Controls.Clear();
                 flowInProgress.Controls.Clear();
                 flowCompleted.Controls.Clear();
-
                 if (tasks == null || tasks.Count == 0) return;
 
                 foreach (var task in tasks)
                 {
                     var card = new TaskCard(task);
-                    card.OnTaskClicked += (t) => OnTaskSelected?.Invoke(t);
-                    
+                    card.OnTaskClicked += (t) => OnTaskSelected?.Invoke(t);                    
                     // Use a more robust width calculation
                     int targetWidth = flowPending.Width > 20 ? flowPending.Width - 25 : 220;
                     card.Width = targetWidth;
@@ -91,8 +100,15 @@ namespace EmployeeManagement_Windows.Views
 
         private async void btnRefresh_Click(object sender, EventArgs e)
         {
-            await LoadTasks();
-            if (this.IsDisposed) return;
+            try
+            {
+                await LoadTasks();
+                if (this.IsDisposed) return;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error refreshing tasks: " + ex.Message);
+            }
         }
     }
 }

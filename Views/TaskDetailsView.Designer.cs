@@ -19,6 +19,7 @@ namespace EmployeeManagement_Windows.Views
         private void InitializeComponent()
         {
             this.pnlHeader = new EmployeeManagement_Windows.Controls.CardPanel();
+            this.btnNewMeeting = new EmployeeManagement_Windows.Controls.ModernButton();
             this.btnToggleComments = new EmployeeManagement_Windows.Controls.ModernButton();
             this.btnBack = new EmployeeManagement_Windows.Controls.ModernButton();
             this.btnSaveStatus = new EmployeeManagement_Windows.Controls.ModernButton();
@@ -50,6 +51,7 @@ namespace EmployeeManagement_Windows.Views
             this.pnlHeader.BackColor = System.Drawing.Color.Transparent;
             this.pnlHeader.BorderRadius = 15;
             this.pnlHeader.CardColor = System.Drawing.Color.White;
+            this.pnlHeader.Controls.Add(this.btnNewMeeting);
             this.pnlHeader.Controls.Add(this.btnToggleComments);
             this.pnlHeader.Controls.Add(this.btnBack);
             this.pnlHeader.Controls.Add(this.btnSaveStatus);
@@ -70,6 +72,26 @@ namespace EmployeeManagement_Windows.Views
             this.pnlHeader.ShadowSize = 4;
             this.pnlHeader.Size = new System.Drawing.Size(960, 280);
             this.pnlHeader.TabIndex = 0;
+            // 
+            // btnNewMeeting
+            // 
+            this.btnNewMeeting.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(95)))), ((int)(((byte)(228)))));
+            this.btnNewMeeting.BorderRadius = 8;
+            this.btnNewMeeting.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnNewMeeting.FlatAppearance.BorderSize = 0;
+            this.btnNewMeeting.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNewMeeting.Font = new System.Drawing.Font("Segoe UI Semibold", 9.5F);
+            this.btnNewMeeting.ForeColor = System.Drawing.Color.White;
+            this.btnNewMeeting.GradientEnd = System.Drawing.Color.Empty;
+            this.btnNewMeeting.GradientStart = System.Drawing.Color.Empty;
+            this.btnNewMeeting.Location = new System.Drawing.Point(315, 225);
+            this.btnNewMeeting.Name = "btnNewMeeting";
+            this.btnNewMeeting.Size = new System.Drawing.Size(120, 35);
+            this.btnNewMeeting.Style = EmployeeManagement_Windows.Controls.ButtonStyle.Primary;
+            this.btnNewMeeting.TabIndex = 13;
+            this.btnNewMeeting.Text = "New Meeting";
+            this.btnNewMeeting.UseVisualStyleBackColor = false;
+            this.btnNewMeeting.Click += new System.EventHandler(this.btnNewMeeting_Click);
             // 
             // btnToggleComments
             // 
@@ -408,6 +430,7 @@ namespace EmployeeManagement_Windows.Views
         private EmployeeManagement_Windows.Controls.ModernButton btnSaveStatus;
         private EmployeeManagement_Windows.Controls.ModernButton btnBack;
         private EmployeeManagement_Windows.Controls.ModernButton btnToggleComments;
+        private EmployeeManagement_Windows.Controls.ModernButton btnNewMeeting;
         private System.Windows.Forms.Panel pnlCommentsContainer;
         private System.Windows.Forms.FlowLayoutPanel pnlComments;
         private EmployeeManagement_Windows.Controls.CardPanel pnlInput;

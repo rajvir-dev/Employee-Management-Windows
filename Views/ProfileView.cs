@@ -18,59 +18,93 @@ namespace EmployeeManagement_Windows.Views
         public ProfileView()
         {
             InitializeComponent();
+            SetupFieldPermissions();
             this.Resize += (s, e) => UpdateLayout();
+        }
+
+        private void SetupFieldPermissions()
+        {
+            // Editable fields (as per user request)
+            txtFullName.ReadOnly = false;
+            txtEmail.ReadOnly = false;
+            txtMobile.ReadOnly = false;
+            txtAddress.ReadOnly = false;
+            txtBio.ReadOnly = false;
+            txtPosition.ReadOnly = false;
+            btnUploadPhoto.Enabled = true;
+
+            // Read-only fields
+            txtBirthDate.ReadOnly = true;
+            txtAmount.ReadOnly = true;
+            cmbSalaryType.Enabled = false;
+            txtPassword.ReadOnly = true;
+            txtConfirmPassword.ReadOnly = true;
         }
 
         private void UpdateLayout()
         {
-            int margin = 20;
-            int cardWidth = this.Width - (margin * 2) - 30; // 30 for scrollbar
-            if (cardWidth < 800) cardWidth = 830;
+            try
+            {
+                int margin = 20;
+                int cardWidth = this.Width - (margin * 2) - 30; // 30 for scrollbar
+                if (cardWidth < 800) cardWidth = 830;
 
-            cardHeader.Width = cardWidth;
-            cardPersonal.Width = cardWidth;
-            cardAdditional.Width = cardWidth;
-            cardSecurity.Width = cardWidth;
-            pnlActions.Width = cardWidth;
+                cardHeader.Width = cardWidth;
+                cardPersonal.Width = cardWidth;
+                cardAdditional.Width = cardWidth;
+                cardSecurity.Width = cardWidth;
+                pnlActions.Width = cardWidth;
 
-            // Header Button - Move to right
-            btnUploadPhoto.Location = new Point(cardWidth - btnUploadPhoto.Width - 30, btnUploadPhoto.Location.Y);
+                // Header Button - Move to right
+                btnUploadPhoto.Location = new Point(cardWidth - btnUploadPhoto.Width - 30, btnUploadPhoto.Location.Y);
 
-            // Column sizing for inputs
-            int spacing = 30;
-            int colWidth = (cardWidth - (spacing + 60)) / 2;
+                // Column sizing for inputs
+                int spacing = 30;
+                int colWidth = (cardWidth - (spacing + 60)) / 2;
 
-            // Personal Info Card
-            txtFullName.Width = colWidth;
-            txtBirthDate.Width = colWidth;
-            txtBirthDate.Left = colWidth + spacing + 30;
-            
-            txtMobile.Width = colWidth;
-            txtEmail.Width = colWidth;
-            txtEmail.Left = colWidth + spacing + 30;
+                // Personal Info Card
+                txtFullName.Width = colWidth;
+                txtBirthDate.Width = colWidth;
+                txtBirthDate.Left = colWidth + spacing + 30;
+                
+                txtMobile.Width = colWidth;
+                txtEmail.Width = colWidth;
+                txtEmail.Left = colWidth + spacing + 30;
 
-            // Professional Details Card
-            txtBio.Width = colWidth;
-            txtAddress.Width = colWidth;
-            txtAddress.Left = colWidth + spacing + 30;
+                // Professional Details Card
+                txtBio.Width = colWidth;
+                txtAddress.Width = colWidth;
+                txtAddress.Left = colWidth + spacing + 30;
 
-            txtPosition.Width = colWidth;
-            txtAmount.Width = colWidth;
-            txtAmount.Left = colWidth + spacing + 30;
+                txtPosition.Width = colWidth;
+                txtAmount.Width = colWidth;
+                txtAmount.Left = colWidth + spacing + 30;
 
-            cmbSalaryType.Width = colWidth;
+                cmbSalaryType.Width = colWidth;
 
-            // Security Card
-            txtPassword.Width = colWidth;
-            txtConfirmPassword.Width = colWidth;
-            txtConfirmPassword.Left = colWidth + spacing + 30;
+                // Security Card
+                txtPassword.Width = colWidth;
+                txtConfirmPassword.Width = colWidth;
+                txtConfirmPassword.Left = colWidth + spacing + 30;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("UpdateLayout error: " + ex.Message);
+            }
         }
 
         protected override async void OnLoad(EventArgs e)
         {
-            base.OnLoad(e);
-            UpdateLayout();
-            await LoadProfileAsync();
+            try
+            {
+                base.OnLoad(e);
+                UpdateLayout();
+                await LoadProfileAsync();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error on profile load: " + ex.Message);
+            }
         }
 
         private async Task LoadProfileAsync()
@@ -230,12 +264,20 @@ namespace EmployeeManagement_Windows.Views
         }
         private string CleanBase64(string base64)
         {
-            if (string.IsNullOrEmpty(base64)) return string.Empty;
-            if (base64.Contains(","))
+            try
             {
-                return base64.Split(',')[1];
+                if (string.IsNullOrEmpty(base64)) return string.Empty;
+                if (base64.Contains(","))
+                {
+                    return base64.Split(',')[1];
+                }
+                return base64;
             }
-            return base64;
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("CleanBase64 error: " + ex.Message);
+                return base64;
+            }
         }
 
         private void lblHeaderName_Click(object sender, EventArgs e)

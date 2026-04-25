@@ -87,5 +87,13 @@ namespace EmployeeManagement_Windows.Services
         {
             return await ApiClient.PutAsync($"api/task/meetings/{encryptedMeetingId}", meetingData);
         }
+
+        /// <summary>
+        /// Deletes a comment.
+        /// </summary>
+        public static async Task<ApiResponse> DeleteCommentAsync(long commentId)
+        {
+            return await ApiClient.DeleteAsync($"api/task/comments/{commentId}");
+        }
     }
 }

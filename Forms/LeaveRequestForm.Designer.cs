@@ -17,9 +17,9 @@ namespace EmployeeManagement_Windows.Forms
         {
             this.lblHeader = new System.Windows.Forms.Label();
             this.lblStart = new System.Windows.Forms.Label();
-            this.dtpStart = new System.Windows.Forms.DateTimePicker();
+            this.dtpStart = new EmployeeManagement_Windows.Controls.ModernDatePicker();
             this.lblEnd = new System.Windows.Forms.Label();
-            this.dtpEnd = new System.Windows.Forms.DateTimePicker();
+            this.dtpEnd = new EmployeeManagement_Windows.Controls.ModernDatePicker();
             this.lblReason = new System.Windows.Forms.Label();
             this.txtReason = new System.Windows.Forms.TextBox();
             this.btnSubmit = new System.Windows.Forms.Button();
@@ -72,11 +72,11 @@ namespace EmployeeManagement_Windows.Forms
             // 
             // dtpStart
             // 
-            this.dtpStart.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpStart.Location = new System.Drawing.Point(25, 150);
             this.dtpStart.Name = "dtpStart";
-            this.dtpStart.Size = new System.Drawing.Size(160, 20);
+            this.dtpStart.Size = new System.Drawing.Size(160, 40);
             this.dtpStart.TabIndex = 2;
+            this.dtpStart.Value = System.DateTime.Today;
             // 
             // lblEnd
             // 
@@ -90,11 +90,11 @@ namespace EmployeeManagement_Windows.Forms
             // 
             // dtpEnd
             // 
-            this.dtpEnd.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpEnd.Location = new System.Drawing.Point(215, 150);
             this.dtpEnd.Name = "dtpEnd";
-            this.dtpEnd.Size = new System.Drawing.Size(160, 20);
+            this.dtpEnd.Size = new System.Drawing.Size(160, 40);
             this.dtpEnd.TabIndex = 4;
+            this.dtpEnd.Value = System.DateTime.Today;
             // 
             // lblReason
             // 
@@ -158,6 +158,7 @@ namespace EmployeeManagement_Windows.Forms
             this.Controls.Add(this.lblStart);
             this.Controls.Add(this.lblHeader);
             this.Name = "LeaveRequestForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Request Leave";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -166,9 +167,9 @@ namespace EmployeeManagement_Windows.Forms
 
         private System.Windows.Forms.Label lblHeader;
         private System.Windows.Forms.Label lblStart;
-        private System.Windows.Forms.DateTimePicker dtpStart;
+        private EmployeeManagement_Windows.Controls.ModernDatePicker dtpStart;
         private System.Windows.Forms.Label lblEnd;
-        private System.Windows.Forms.DateTimePicker dtpEnd;
+        private EmployeeManagement_Windows.Controls.ModernDatePicker dtpEnd;
         private System.Windows.Forms.Label lblReason;
         private System.Windows.Forms.TextBox txtReason;
         private System.Windows.Forms.Button btnSubmit;
