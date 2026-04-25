@@ -74,7 +74,7 @@ namespace EmployeeManagement_Windows.Views
                 cmbStatus.Font = new Font("Segoe UI", 12F);
 
                 cmbStatus.Items.Clear();
-                cmbStatus.Items.AddRange(new object[] { "All Statuses", "Sheduled", "OnGoing", "Concluded", "Cancelled", "ReSheduled" });
+                cmbStatus.Items.AddRange(new object[] { "All Statuses", "Scheduled", "OnGoing", "Concluded", "Cancelled", "Rescheduled" });
                 cmbStatus.FlatStyle = FlatStyle.Flat;
                 cmbStatus.SelectedIndex = 0;
                 cmbStatus.DrawMode = DrawMode.OwnerDrawFixed;
@@ -97,11 +97,11 @@ namespace EmployeeManagement_Windows.Views
                 Color textColor = ThemeColors.TextPrimary;
 
                 // Define colors matching the user image
-                if (text == "Sheduled") textColor = ColorTranslator.FromHtml("#6B5FE4"); 
+                if (text == "Scheduled") textColor = ColorTranslator.FromHtml("#6B5FE4"); 
                 else if (text == "OnGoing") textColor = ColorTranslator.FromHtml("#F59E0B"); 
                 else if (text == "Concluded") textColor = ColorTranslator.FromHtml("#374151"); 
                 else if (text == "Cancelled") textColor = ColorTranslator.FromHtml("#E24B4A"); 
-                else if (text == "ReSheduled") textColor = ColorTranslator.FromHtml("#10B981"); 
+                else if (text == "Rescheduled") textColor = ColorTranslator.FromHtml("#10B981"); 
 
                 // Draw background
                 if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
@@ -169,8 +169,8 @@ namespace EmployeeManagement_Windows.Views
                     string mStatus = meeting.StatusText ?? "";
                     bool matchesStatus = selectedStatus == "All Statuses" || 
                                        mStatus.Equals(selectedStatus, StringComparison.OrdinalIgnoreCase) ||
-                                       (selectedStatus.Equals("Sheduled", StringComparison.OrdinalIgnoreCase) && mStatus.Equals("Scheduled", StringComparison.OrdinalIgnoreCase)) ||
-                                       (selectedStatus.Equals("ReSheduled", StringComparison.OrdinalIgnoreCase) && mStatus.Equals("Rescheduled", StringComparison.OrdinalIgnoreCase));
+                                       (selectedStatus.Equals("Rescheduled", StringComparison.OrdinalIgnoreCase) && mStatus.Equals("ReSheduled", StringComparison.OrdinalIgnoreCase)) ||
+                                       (selectedStatus.Equals("Scheduled", StringComparison.OrdinalIgnoreCase) && mStatus.Equals("Sheduled", StringComparison.OrdinalIgnoreCase));
                     
                     bool matchesDate = true;
                     if (meeting.MeetingDateTime.HasValue)

@@ -34,6 +34,7 @@ namespace EmployeeManagement_Windows.Helpers
             public static (Color bg, Color text) Pending = (ColorTranslator.FromHtml("#FEF3C7"), ColorTranslator.FromHtml("#92400E"));
             public static (Color bg, Color text) Approved = (ColorTranslator.FromHtml("#D1FAE5"), ColorTranslator.FromHtml("#065F46"));
             public static (Color bg, Color text) Rejected = (ColorTranslator.FromHtml("#FEE2E2"), ColorTranslator.FromHtml("#991B1B"));
+            public static (Color bg, Color text) Rescheduled = (ColorTranslator.FromHtml("#D1FAE5"), ColorTranslator.FromHtml("#065F46")); // Teal/Green
             public static (Color bg, Color text) InProgress = (ColorTranslator.FromHtml("#FEF3C7"), ColorTranslator.FromHtml("#D97706")); // Amber/Yellow
         }
 

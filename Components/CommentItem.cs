@@ -11,6 +11,7 @@ namespace EmployeeManagement_Windows.Components
     {
         private CommentDto _comment;
         public event Action<long> OnCommentDeleted;
+        public event Action OnCommentUpdated;
 
         public CommentItem(CommentDto comment)
         {
@@ -32,6 +33,22 @@ namespace EmployeeManagement_Windows.Components
             if (!isMe)
             {
                 deleteToolStripMenuItem.Visible = false;
+            }
+
+            // Meeting-specific options
+            if (_comment.IsMeeting)
+            {
+                var editItem = new ToolStripMenuItem("📝 Edit Meeting");
+                editItem.Click += async (s, e) => {
+                    using (var form = new Forms.ScheduleMeetingForm(_comment))
+                    {
+                        if (form.ShowDialog() == DialogResult.OK)
+                        {
+                            OnCommentUpdated?.Invoke();
+                        }
+                    }
+                };
+                cmsComment.Items.Insert(0, editItem);
             }
         }
 

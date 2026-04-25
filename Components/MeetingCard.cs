@@ -30,11 +30,14 @@ namespace EmployeeManagement_Windows.Components
                 
                 // Status Badge
                 string status = !string.IsNullOrWhiteSpace(_meeting.StatusText) ? _meeting.StatusText : "Scheduled";
+                if (_meeting.StatusId == 25) status = "Rescheduled";
                 badgeStatus.Text = status;
                 
                 // Theme Logic based on StatusId
                 if (_meeting.StatusId == 21) // Scheduled
                     badgeStatus.SetTheme(ThemeColors.StatusBadgeColors.Scheduled);
+                else if (_meeting.StatusId == 25) // Rescheduled
+                    badgeStatus.SetTheme(ThemeColors.StatusBadgeColors.Rescheduled);
                 else if (_meeting.StatusId == 23) // Concluded
                     badgeStatus.SetTheme(ThemeColors.StatusBadgeColors.Concluded);
                 else if (_meeting.StatusId == 24) // Cancelled

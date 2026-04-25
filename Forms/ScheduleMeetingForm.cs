@@ -80,7 +80,7 @@ namespace EmployeeManagement_Windows.Forms
                         HoursWorked = hours,
                         MinutesWorked = minutes,
                         TaskId = _meeting.EncryptedTaskId,
-                        StatusId = int.Parse(_meeting.Status ?? "21")
+                        StatusId = 25 // Always set to Rescheduled when updating
                     };
                     result = await TaskService.UpdateMeetingAsync(_meeting.EncryptedId, updateData);
                 }

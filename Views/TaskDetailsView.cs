@@ -264,6 +264,7 @@ namespace EmployeeManagement_Windows.Views
                 foreach (var comment in comments)
                 {
                     var item = new CommentItem(comment);
+                    item.OnCommentUpdated += async () => await LoadComments();
                     item.Width = pnlComments.Width - 30; // Leave room for scrollbar
                     pnlComments.Controls.Add(item);
                 }
